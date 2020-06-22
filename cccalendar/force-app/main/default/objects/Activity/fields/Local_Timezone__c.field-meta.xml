@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Local_Timezone__c</fullName>
+    <description>Specify event&apos;s local timezone. Required if Display event&apos;s local timezone is checked</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Specify event&apos;s local timezone. Required if Display event&apos;s local timezone is checked</inlineHelpText>
+    <label>Local Timezone</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>IANA_Timezones</valueSetName>
+    </valueSet>
+</CustomField>
