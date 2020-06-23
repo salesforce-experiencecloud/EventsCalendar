@@ -1,11 +1,11 @@
 import { LightningElement, api, track, wire } from 'lwc';
 import {loadStyle, loadScript} from 'lightning/platformResourceLoader';
-import fullCalendar from '@salesforce/resourceUrl/fullcalendar500';
+import fullCalendar from '@salesforce/resourceUrl/fullcalendar420';
 import jquery341 from '@salesforce/resourceUrl/jquery341';
 import LANG from '@salesforce/i18n/lang';
 import LOCALE from '@salesforce/i18n/locale';
 
-const eventsJSON = '[{"attributes":{"type":"Event","url":"/services/data/v48.0/sobjects/Event/00U1U000008tip8UAA"},"Id":"00U1U000008tip8UAA","Subject":"Community Cloud Ask the Expert Webinar","IsAllDayEvent":false,"ActivityDateTime":"2020-06-24T17:00:00.000+0000","ActivityDate":"2020-06-24","DurationInMinutes":60,"StartDateTime":"2020-06-24T17:00:00.000+0000","EndDateTime":"2020-06-24T18:00:00.000+0000","Description":"Join us as we answer adoption, best-practice and how-to questions live! This is your chance to talk with Salesforce experts and to learn from your peers.","OwnerId":"0051U0000021sbeQAA","Type":"Virtual","IsPrivate":false,"ShowAs":"Busy","IsDeleted":false,"IsChild":false,"IsGroupEvent":false,"GroupEventType":"0","CreatedDate":"2019-09-03T23:04:06.000+0000","CreatedById":"0051U000005LF8QQAW","LastModifiedDate":"2020-04-09T18:32:55.000+0000","LastModifiedById":"0051U000005LF8QQAW","SystemModstamp":"2020-04-09T18:32:55.000+0000","IsArchived":false,"IsVisibleInSelfService":true,"IsRecurrence":false,"IsReminderSet":false,"EventSubtype":"Event","IsRecurrence2Exclusion":false,"Recurrence2PatternText":"RRULE:FREQ=WEEKLY;INTERVAL=2;BYDAY=WE;WKST=SU","Recurrence2PatternVersion":"1","IsRecurrence2":true,"IsRecurrence2Exception":false,"Recurrence2PatternStartDate":"2019-09-04T17:00:00.000+0000","Recurrence2PatternTimeZone":"America/New_York","Image_URL__c":"/file-asset/astro","Calendar_Background_Color__c":"rgb(255, 117, 36)","Calendar_Border_Color__c":"rgb(255, 117, 36)","Calendar_Rendering__c":"Normal","Calendar_Text_Color__c":"White","Display_Events_Local_Timezone__c":false,"Event_URL_Text__c":"Register","Event_URL__c":"https://register.gotowebinar.com/rt/2968421206168261891"},{"attributes":{"type":"Event","url":"/services/data/v48.0/sobjects/Event/00U1U00000D9h5ZUAR"},"Id":"00U1U00000D9h5ZUAR","Subject":"Community Cloud: Show Me How","IsAllDayEvent":false,"ActivityDateTime":"2020-06-25T16:00:00.000+0000","ActivityDate":"2020-06-25","DurationInMinutes":60,"StartDateTime":"2020-06-25T16:00:00.000+0000","EndDateTime":"2020-06-25T17:00:00.000+0000","Description":"Join this call to learn about some of Community Cloud\'s out-of-the-box features and talk about relevant best practices and tips & tricks. Our goal is to spend approximately 10-15 mins to get hands-on, demo, and discuss each topic.\r\n\r\nThis week\'s topic list:\r\n[TBD]","OwnerId":"0051U0000021sbeQAA","Type":"Virtual","IsPrivate":false,"ShowAs":"Busy","IsDeleted":false,"IsChild":false,"IsGroupEvent":false,"CreatedDate":"2020-05-04T16:56:08.000+0000","CreatedById":"0051U000005LF8QQAW","LastModifiedDate":"2020-05-04T16:56:08.000+0000","LastModifiedById":"0051U000005LF8QQAW","SystemModstamp":"2020-05-04T16:56:08.000+0000","IsArchived":false,"IsVisibleInSelfService":false,"IsRecurrence":false,"IsReminderSet":false,"EventSubtype":"Event","IsRecurrence2Exclusion":false,"Recurrence2PatternText":"RRULE:FREQ=WEEKLY;INTERVAL=2;BYDAY=TH;WKST=SU","Recurrence2PatternVersion":"1","IsRecurrence2":true,"IsRecurrence2Exception":false,"Recurrence2PatternStartDate":"2020-05-14T16:00:00.000+0000","Recurrence2PatternTimeZone":"America/New_York","Image_URL__c":"/file-asset/astro","Calendar_Background_Color__c":"rgb(148, 0, 158)","Calendar_Border_Color__c":"rgb(148, 0, 158)","Calendar_Rendering__c":"Normal","Calendar_Text_Color__c":"White","Display_Events_Local_Timezone__c":false,"Event_URL_Text__c":"Register","Event_URL__c":"https://attendee.gotowebinar.com/rt/86995964372276226"},{"attributes":{"type":"Event","url":"/services/data/v48.0/sobjects/Event/00U1U000008tiplUAA"},"Id":"00U1U000008tiplUAA","Subject":"Community Cloud Ask the Expert Webinar","IsAllDayEvent":false,"ActivityDateTime":"2020-07-01T16:00:00.000+0000","ActivityDate":"2020-07-01","DurationInMinutes":60,"StartDateTime":"2020-07-01T16:00:00.000+0000","EndDateTime":"2020-07-01T17:00:00.000+0000","Description":"Join us as we answer adoption, best-practice and how-to questions live! This is your chance to talk with Salesforce experts and to learn from your peers.","OwnerId":"0051U0000021sbeQAA","Type":"Virtual","IsPrivate":false,"ShowAs":"Busy","IsDeleted":false,"IsChild":false,"IsGroupEvent":false,"GroupEventType":"0","CreatedDate":"2019-09-03T23:05:04.000+0000","CreatedById":"0051U000005LF8QQAW","LastModifiedDate":"2020-04-09T18:33:23.000+0000","LastModifiedById":"0051U000005LF8QQAW","SystemModstamp":"2020-04-09T18:33:23.000+0000","IsArchived":false,"IsVisibleInSelfService":true,"IsRecurrence":false,"IsReminderSet":false,"EventSubtype":"Event","IsRecurrence2Exclusion":false,"Recurrence2PatternText":"RRULE:FREQ=WEEKLY;INTERVAL=2;BYDAY=WE;WKST=SU","Recurrence2PatternVersion":"1","IsRecurrence2":true,"IsRecurrence2Exception":false,"Recurrence2PatternStartDate":"2019-09-11T16:00:00.000+0000","Recurrence2PatternTimeZone":"America/New_York","Image_URL__c":"/file-asset/astro","Calendar_Background_Color__c":"rgb(255, 117, 36)","Calendar_Border_Color__c":"rgb(255, 117, 36)","Calendar_Rendering__c":"Normal","Calendar_Text_Color__c":"White","Display_Events_Local_Timezone__c":false,"Event_URL_Text__c":"Register","Event_URL__c":"https://register.gotowebinar.com/rt/2968421206168261891"},{"attributes":{"type":"Event","url":"/services/data/v48.0/sobjects/Event/00U1U000008tip9UAA"},"Id":"00U1U000008tip9UAA","Subject":"Community Cloud Ask the Expert Webinar","IsAllDayEvent":false,"ActivityDateTime":"2020-07-08T17:00:00.000+0000","ActivityDate":"2020-07-08","DurationInMinutes":60,"StartDateTime":"2020-07-08T17:00:00.000+0000","EndDateTime":"2020-07-08T18:00:00.000+0000","Description":"Join us as we answer adoption, best-practice and how-to questions live! This is your chance to talk with Salesforce experts and to learn from your peers.","OwnerId":"0051U0000021sbeQAA","Type":"Virtual","IsPrivate":false,"ShowAs":"Busy","IsDeleted":false,"IsChild":false,"IsGroupEvent":false,"GroupEventType":"0","CreatedDate":"2019-09-03T23:04:06.000+0000","CreatedById":"0051U000005LF8QQAW","LastModifiedDate":"2020-04-09T18:32:55.000+0000","LastModifiedById":"0051U000005LF8QQAW","SystemModstamp":"2020-04-09T18:32:55.000+0000","IsArchived":false,"IsVisibleInSelfService":true,"IsRecurrence":false,"IsReminderSet":false,"EventSubtype":"Event","IsRecurrence2Exclusion":false,"Recurrence2PatternText":"RRULE:FREQ=WEEKLY;INTERVAL=2;BYDAY=WE;WKST=SU","Recurrence2PatternVersion":"1","IsRecurrence2":true,"IsRecurrence2Exception":false,"Recurrence2PatternStartDate":"2019-09-04T17:00:00.000+0000","Recurrence2PatternTimeZone":"America/New_York","Image_URL__c":"/file-asset/astro","Calendar_Background_Color__c":"rgb(255, 117, 36)","Calendar_Border_Color__c":"rgb(255, 117, 36)","Calendar_Rendering__c":"Normal","Calendar_Text_Color__c":"White","Display_Events_Local_Timezone__c":false,"Event_URL_Text__c":"Register","Event_URL__c":"https://register.gotowebinar.com/rt/2968421206168261891"}]';
+const eventsJSON = '[{"attributes":{"type":"Event","url":"/services/data/v48.0/sobjects/Event/00U1U000008tip8UAA"},"Id":"00U1U000008tip8UAA","Subject":"Community Cloud Ask the Expert Webinar","IsAllDayEvent":false,"ActivityDateTime":"2020-06-24T17:00:00.000+0000","ActivityDate":"2020-06-24","DurationInMinutes":60,"StartDateTime":"2020-06-24T17:00:00.000+0000","EndDateTime":"2020-06-24T18:00:00.000+0000","Description":"Join us as we answer adoption, best-practice and how-to questions live! This is your chance to talk with Salesforce experts and to learn from your peers.","OwnerId":"0051U0000021sbeQAA","Type":"Virtual","IsPrivate":false,"ShowAs":"Busy","IsDeleted":false,"IsChild":false,"IsGroupEvent":false,"GroupEventType":"0","CreatedDate":"2019-09-03T23:04:06.000+0000","CreatedById":"0051U000005LF8QQAW","LastModifiedDate":"2020-04-09T18:32:55.000+0000","LastModifiedById":"0051U000005LF8QQAW","SystemModstamp":"2020-04-09T18:32:55.000+0000","IsArchived":false,"IsVisibleInSelfService":true,"IsRecurrence":false,"IsReminderSet":false,"EventSubtype":"Event","IsRecurrence2Exclusion":false,"Recurrence2PatternText":"RRULE:FREQ=WEEKLY;INTERVAL=2;BYDAY=WE;WKST=SU","Recurrence2PatternVersion":"1","IsRecurrence2":true,"IsRecurrence2Exception":false,"Recurrence2PatternStartDate":"2019-09-04T17:00:00.000+0000","Recurrence2PatternTimeZone":"America/New_York","Image_URL__c":"/file-asset/astro","Calendar_Background_Color__c":"rgb(255, 117, 36)","Calendar_Border_Color__c":"rgb(255, 117, 36)","Calendar_Rendering__c":"Normal","Calendar_Text_Color__c":"White","Display_Events_Local_Timezone__c":false,"Event_URL_Text__c":"Register","Event_URL__c":"https://register.gotowebinar.com/rt/2968421206168261891"},{"attributes":{"type":"Event","url":"/services/data/v48.0/sobjects/Event/00U1U00000D9h5ZUAR"},"Id":"00U1U00000D9h5ZUAR","Subject":"Community Cloud: Show Me How","IsAllDayEvent":false,"ActivityDateTime":"2020-06-25T16:00:00.000+0000","ActivityDate":"2020-06-25","DurationInMinutes":60,"StartDateTime":"2020-06-25T16:00:00.000+0000","EndDateTime":"2020-06-25T17:00:00.000+0000","Description":"Join this call to learn about some of Community Clouds out-of-the-box features and talk about relevant best practices and tips & tricks. Our goal is to spend approximately 10-15 mins to get hands-on, demo, and discuss each topic.This weeks topic list:[TBD]","OwnerId":"0051U0000021sbeQAA","Type":"Virtual","IsPrivate":false,"ShowAs":"Busy","IsDeleted":false,"IsChild":false,"IsGroupEvent":false,"CreatedDate":"2020-05-04T16:56:08.000+0000","CreatedById":"0051U000005LF8QQAW","LastModifiedDate":"2020-05-04T16:56:08.000+0000","LastModifiedById":"0051U000005LF8QQAW","SystemModstamp":"2020-05-04T16:56:08.000+0000","IsArchived":false,"IsVisibleInSelfService":false,"IsRecurrence":false,"IsReminderSet":false,"EventSubtype":"Event","IsRecurrence2Exclusion":false,"Recurrence2PatternText":"RRULE:FREQ=WEEKLY;INTERVAL=2;BYDAY=TH;WKST=SU","Recurrence2PatternVersion":"1","IsRecurrence2":true,"IsRecurrence2Exception":false,"Recurrence2PatternStartDate":"2020-05-14T16:00:00.000+0000","Recurrence2PatternTimeZone":"America/New_York","Image_URL__c":"/file-asset/astro","Calendar_Background_Color__c":"rgb(148, 0, 158)","Calendar_Border_Color__c":"rgb(148, 0, 158)","Calendar_Rendering__c":"Normal","Calendar_Text_Color__c":"White","Display_Events_Local_Timezone__c":false,"Event_URL_Text__c":"Register","Event_URL__c":"https://attendee.gotowebinar.com/rt/86995964372276226"},{"attributes":{"type":"Event","url":"/services/data/v48.0/sobjects/Event/00U1U000008tiplUAA"},"Id":"00U1U000008tiplUAA","Subject":"Community Cloud Ask the Expert Webinar","IsAllDayEvent":false,"ActivityDateTime":"2020-07-01T16:00:00.000+0000","ActivityDate":"2020-07-01","DurationInMinutes":60,"StartDateTime":"2020-07-01T16:00:00.000+0000","EndDateTime":"2020-07-01T17:00:00.000+0000","Description":"Join us as we answer adoption, best-practice and how-to questions live! This is your chance to talk with Salesforce experts and to learn from your peers.","OwnerId":"0051U0000021sbeQAA","Type":"Virtual","IsPrivate":false,"ShowAs":"Busy","IsDeleted":false,"IsChild":false,"IsGroupEvent":false,"GroupEventType":"0","CreatedDate":"2019-09-03T23:05:04.000+0000","CreatedById":"0051U000005LF8QQAW","LastModifiedDate":"2020-04-09T18:33:23.000+0000","LastModifiedById":"0051U000005LF8QQAW","SystemModstamp":"2020-04-09T18:33:23.000+0000","IsArchived":false,"IsVisibleInSelfService":true,"IsRecurrence":false,"IsReminderSet":false,"EventSubtype":"Event","IsRecurrence2Exclusion":false,"Recurrence2PatternText":"RRULE:FREQ=WEEKLY;INTERVAL=2;BYDAY=WE;WKST=SU","Recurrence2PatternVersion":"1","IsRecurrence2":true,"IsRecurrence2Exception":false,"Recurrence2PatternStartDate":"2019-09-11T16:00:00.000+0000","Recurrence2PatternTimeZone":"America/New_York","Image_URL__c":"/file-asset/astro","Calendar_Background_Color__c":"rgb(255, 117, 36)","Calendar_Border_Color__c":"rgb(255, 117, 36)","Calendar_Rendering__c":"Normal","Calendar_Text_Color__c":"White","Display_Events_Local_Timezone__c":false,"Event_URL_Text__c":"Register","Event_URL__c":"https://register.gotowebinar.com/rt/2968421206168261891"},{"attributes":{"type":"Event","url":"/services/data/v48.0/sobjects/Event/00U1U000008tip9UAA"},"Id":"00U1U000008tip9UAA","Subject":"Community Cloud Ask the Expert Webinar","IsAllDayEvent":false,"ActivityDateTime":"2020-07-08T17:00:00.000+0000","ActivityDate":"2020-07-08","DurationInMinutes":60,"StartDateTime":"2020-07-08T17:00:00.000+0000","EndDateTime":"2020-07-08T18:00:00.000+0000","Description":"Join us as we answer adoption, best-practice and how-to questions live! This is your chance to talk with Salesforce experts and to learn from your peers.","OwnerId":"0051U0000021sbeQAA","Type":"Virtual","IsPrivate":false,"ShowAs":"Busy","IsDeleted":false,"IsChild":false,"IsGroupEvent":false,"GroupEventType":"0","CreatedDate":"2019-09-03T23:04:06.000+0000","CreatedById":"0051U000005LF8QQAW","LastModifiedDate":"2020-04-09T18:32:55.000+0000","LastModifiedById":"0051U000005LF8QQAW","SystemModstamp":"2020-04-09T18:32:55.000+0000","IsArchived":false,"IsVisibleInSelfService":true,"IsRecurrence":false,"IsReminderSet":false,"EventSubtype":"Event","IsRecurrence2Exclusion":false,"Recurrence2PatternText":"RRULE:FREQ=WEEKLY;INTERVAL=2;BYDAY=WE;WKST=SU","Recurrence2PatternVersion":"1","IsRecurrence2":true,"IsRecurrence2Exception":false,"Recurrence2PatternStartDate":"2019-09-04T17:00:00.000+0000","Recurrence2PatternTimeZone":"America/New_York","Image_URL__c":"/file-asset/astro","Calendar_Background_Color__c":"rgb(255, 117, 36)","Calendar_Border_Color__c":"rgb(255, 117, 36)","Calendar_Rendering__c":"Normal","Calendar_Text_Color__c":"White","Display_Events_Local_Timezone__c":false,"Event_URL_Text__c":"Register","Event_URL__c":"https://register.gotowebinar.com/rt/2968421206168261891"}]';
 
 
 export default class Cccalendar extends LightningElement {
@@ -35,27 +35,36 @@ export default class Cccalendar extends LightningElement {
         'Europe/London': 'British Time',
         'Europe/Paris': 'Central European Time' 
         };
-    
-    connectedCallback()
+
+    renderedCallback()
     {
         Promise.all([
-            loadStyle(this, fullCalendar + '/fullcalendar-5.0.0/packages/core/main.min.css'),
-            loadStyle(this, fullCalendar + '/fullcalendar-5.0.0/packages/bootstrap/main.min.css'),
-            loadStyle(this, fullCalendar + '/fullcalendar-5.0.0/packages/daygrid/main.min.css'),
-            loadStyle(this, fullCalendar + '/fullcalendar-5.0.0/packages/timegrid/main.min.css'),
-            loadStyle(this, fullCalendar + '/fullcalendar-5.0.0/packages/list/main.min.css'),
-            loadScript(this, fullCalendar + '/fullcalendar-5.0.0/packages/core/main.min.js'),
-            loadScript(this, fullCalendar + '/fullcalendar-5.0.0/packages/bootstrap/main.min.js'),
-            loadScript(this, fullCalendar + '/fullcalendar-5.0.0/packages/daygrid/main.min.js'),
-            loadScript(this, fullCalendar + '/fullcalendar-5.0.0/packages/timegrid/main.min.js'),
-            loadScript(this, fullCalendar + '/fullcalendar-5.0.0/packages/list/main.min.js'),
-            loadScript(this, fullCalendar + '/fullcalendar-5.0.0/packages/interaction/main.min.js'),
+            loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/core/main.min.css'),
+            loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/bootstrap/main.min.css'),
+            loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/daygrid/main.min.css'),
+            loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/timegrid/main.min.css'),
+            loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/list/main.min.css'),
             loadScript(this, jquery341 + '/jquery.min.js'),
+            loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/core/main.js')
+            
           ]).then(() => {
-                this.items = JSON.parse(this.eventsJSON);
-                //this.populateCalendarEventsJSONObject(this.items);
-                this.renderCalendar();
-          }).catch((error) => {
+            Promise.all([
+                loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/bootstrap/main.min.js'),
+                loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/daygrid/main.min.js'),
+                loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/interaction/main.min.js'),
+                loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/timegrid/main.min.js'),
+                loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/list/main.min.js')
+            ]).then(() => {
+                try {
+
+                    this.items = JSON.parse(eventsJSON);
+                    this.populateCalendarEventsJSONObject(this.items);
+                    this.renderCalendar();
+                } catch(err) {
+                    console.log(err);
+                }
+            });
+          }).catch( (error) => {
               console.log(error);
           });
     }
@@ -382,6 +391,7 @@ export default class Cccalendar extends LightningElement {
                 defaultView: defaultView,
                 //defaultDate: '2019-06-07',
                 eventColor: eventColor,
+                weekends: false,
                 height: 'auto',
                 header: {
                 left: 'prev,next,today',
@@ -391,15 +401,12 @@ export default class Cccalendar extends LightningElement {
                 timeZone: selectedTimezone,
                 events: eventsJSONObj,
                 dayClick: (info) => {
-                    var test;
                     info.preventDefault();
                 },
                 eventClick: (info) => {
-                    var test;
                     info.preventDefault();
                 },
                 dateClick: (info) => {
-                    var test;
                     info.preventDefault();
                 },
                 eventRender: (info) =>
@@ -411,26 +418,28 @@ export default class Cccalendar extends LightningElement {
                         {
 
                             $(info.el).addClass('eventPopover-'+info.event.id); 
+                            info.el.setAttribute('data-event-id', info.event.id);
                             $(info.el).bind( "click", {
                                 info: info
-                            }, (ev) => {
+                            }, ((ev) => {
                                 
-                                //helper.handleShowPopover(component,event,helper,info, ev);
+                                this.handleEventClick(ev);
 
-                            });
+                            }).bind(this));
 
                         }
                         else
                         {
 
                             $(info.el).addClass('eventPopover-'+info.event.id);
+                            info.el.setAttribute('data-event-id', info.event.id);
                             $(info.el).bind( "click", {
                                 info: info
-                            },(ev) => {
-                                
-                                //helper.handleShowPopover(component,event,helper,info, ev);
+                            },((ev) => {
 
-                            });
+                                this.handleEventClick(ev);
+
+                            }).bind(this));
 
                         }
 
@@ -455,9 +464,15 @@ export default class Cccalendar extends LightningElement {
             }
 
         } catch(err){
-
+            console.log(err);
         }
 
+    }
+
+    handleEventClick(info)
+    {
+        console.log(info);
+        console.log(this.timezone);
     }
 
 
