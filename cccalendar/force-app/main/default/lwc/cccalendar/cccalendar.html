@@ -1,5 +1,28 @@
 <template>
-    
+
+    <template if:true={isInit}>
+
+        <div class="slds-m-bottom_large">
+            <lightning-combobox
+                        name="timezones"
+                        label="Choose Timezone"
+                        value={timezone}
+                        placeholder="Choose Timezone"
+                        options={timezoneObjList}
+                        onchange={handleTimezoneChange}
+                        data-name="timezonePicklist"
+            ></lightning-combobox>
+        </div>
+
+    </template>
+
     <div data-id='calendar' lwc:dom="manual"></div>
+
+    <template if:true={eventDetailsModalOpen}>
+
+        <div class="demo-only" style="height: 800px;">
+            <c-ccevent-details event={selectedEvent} onclosedetailsmodalevent={closeEventDetailsModal}></c-ccevent-details>
+        </div>
+    </template>
 
 </template>

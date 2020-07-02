@@ -1,0 +1,14 @@
+.cccalendar_slds-modal__container
+{
+    width: 75%;
+    max-width: 75rem;
+}
+
+.eventHeader {
+    text-align: left;
+}
+
+.titleDiv
+{
+    display: inline-flex;
+}

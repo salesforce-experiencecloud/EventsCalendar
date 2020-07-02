@@ -8,4 +8,37 @@
         <target>lightningCommunity__Page</target>
         <target>lightningCommunity__Default</target>
     </targets>
+
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+
+            <property name="pastMonths" type="Integer" label="Number of past months" required="true" default="6"
+            description="Set the number of months in the past to retrieve events for."/>
+
+            <property name="futureMonths" type="Integer" label="Number of future months" required="true" default="6"
+            description="Set the number of months in the future to retrieve events for."/>
+
+            <property name="eventLimit" type="Integer" label="Max number of events to retrieve" required="true" default="1000"
+            description="Set the maximum number of events to retrieve."/>
+
+            <property name="whatId" type="String" label="What Id / Related To Filter" required="false" default=""
+            description="If set, the events will be filtered on the What Id / Related To field."/>
+
+            <property name="whoId" type="String" label="Who Id / Name Filter" required="false" default=""
+            description="If set, the events will be filtered on the Who Id / Name field."/>
+
+            <property name="ownerId" type="String" label="Owner Id / Assigned To Filter" required="false" default=""
+            description="If set, the events will be filtered on the Owner Id / Assigned To field."/>
+
+            <property name="timezoneLabelsJSON" type="String" label="Timezone Labels JSON" required="false" default="{&#x22;America/Los_Angeles&#x22;:&#x22;US Pacific Time&#x22;,&#x22;America/Chicago&#x22;:&#x22;US Central Time&#x22;,&#x22;America/Denver&#x22;:&#x22;US Mountain Time&#x22;,&#x22;America/Indianapolis&#x22;:&#x22;US Eastern Time&#x22;,&#x22;GMT&#x22;:&#x22;GMT&#x22;,&#x22;Asia/Jakarta&#x22;:&#x22;Western Indonesian Time&#x22;,&#x22;Asia/Makassar&#x22;:&#x22;Central Indonesian Time&#x22;,&#x22;Asia/Jayapura&#x22;:&#x22;Eastern Indonesian Time&#x22;,&#x22;Asia/Kolkata&#x22;:&#x22;India Standard Time&#x22;,&#x22;Asia/Tokyo&#x22;:&#x22;Japan Time&#x22;,&#x22;Australia/Sydney&#x22;:&#x22;Australian Eastern Standard Time&#x22;,&#x22;Australia/Darwin&#x22;:&#x22;Australian Central Standard Time&#x22;,&#x22;Australia/Perth&#x22;:&#x22;Australian Western Standard Time&#x22;,&#x22;Europe/London&#x22;:&#x22;British Time&#x22;,&#x22;Europe/Paris&#x22;:&#x22;Central European Time&#x22;}"
+            description="JSON String representing a map of labels of timezones. Example: {&#x22;America/Los_Angeles&#x22;:&#x22;US Pacific Time&#x22;,&#x22;America/Chicago&#x22;:&#x22;US Central Time&#x22;,&#x22;America/Denver&#x22;:&#x22;US Mountain Time&#x22;,&#x22;America/Indianapolis&#x22;:&#x22;US Eastern Time&#x22;,&#x22;GMT&#x22;:&#x22;GMT&#x22;,&#x22;Asia/Jakarta&#x22;:&#x22;Western Indonesian Time&#x22;,&#x22;Asia/Makassar&#x22;:&#x22;Central Indonesian Time&#x22;,&#x22;Asia/Jayapura&#x22;:&#x22;Eastern Indonesian Time&#x22;,&#x22;Asia/Kolkata&#x22;:&#x22;India Standard Time&#x22;,&#x22;Asia/Tokyo&#x22;:&#x22;Japan Time&#x22;,&#x22;Australia/Sydney&#x22;:&#x22;Australian Eastern Standard Time&#x22;,&#x22;Australia/Darwin&#x22;:&#x22;Australian Central Standard Time&#x22;,&#x22;Australia/Perth&#x22;:&#x22;Australian Western Standard Time&#x22;,&#x22;Europe/London&#x22;:&#x22;British Time&#x22;,&#x22;Europe/Paris&#x22;:&#x22;Central European Time&#x22;}"/>
+
+            <property name="overrideTimezoneList" type="Boolean" label="Override List of Timezones" default="false"
+            description="If set, supply a comma separated list of timezone values in the next property to override the timezone list with."/>
+
+            <property name="listofTimezonesOverride" type="String" label="List of Timezones Override" required="false" default="America/Los_Angeles,America/Chicago,America/Denver,America/Indianapolis,GMT,Europe/London,Europe/Paris,Asia/Jakarta,Asia/Makassar,Asia/Jayapura,Asia/Kolkata,Asia/Tokyo,Australia/Sydney,Australia/Darwin,Australia/Perth"
+            description="If Override List of Timezones is checked, pass comma separated values of timezones to override with. Example: America/Los_Angeles,America/Chicago,America/Denver,America/Indianapolis,GMT,Europe/London,Europe/Paris,Asia/Jakarta,Asia/Makassar,Asia/Jayapura,Asia/Kolkata,Asia/Tokyo,Australia/Sydney,Australia/Darwin,Australia/Perth"/>
+
+        </targetConfig>
+    </targetConfigs>
 </LightningComponentBundle>
