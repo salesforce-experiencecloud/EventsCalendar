@@ -8,11 +8,17 @@ export default class Ccbase extends LightningElement {
     @track isInit = false;
     @track events;
     @track eventsMap = new Map();
+    @track siteUrl = '';
+    @track timezoneLabels = []; 
 
-    populateCalendarEvents(items, localTimezone) {
+    @track timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+    localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+    populateCalendarEvents(items) {
 
         const months = ["JAN", "FEB", "MAR","APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-        this.timezoneLabels = JSON.parse(this.timezoneLabelsJSON);
+        this.timezoneLabels = (this.timezoneLabelsJSON !== undefined && this.timezoneLabelsJSON !== null && this.timezoneLabelsJSON.trim() !== '') ? JSON.parse(this.timezoneLabelsJSON) : this.timezoneLabels;
 
         let events = '';
         let eventInput = [];
@@ -32,7 +38,7 @@ export default class Ccbase extends LightningElement {
             descriptionLength = 250;
         }
 
-        let tmptimezone = localTimezone;
+        let tmptimezone = this.timezone;
 
         let timezoneURLParam = '';
 
@@ -47,13 +53,14 @@ export default class Ccbase extends LightningElement {
             }
         }
 
-        if(tmptimezone !== undefined && tmptimezone !== null && tmptimezone.trim() !== '' && this.timezone != localTimezone)
+        let timezoneLabel = this.timezoneLabels[this.timezone];
+        timezoneLabel = (timezoneLabel !== undefined && timezoneLabel !== null && timezoneLabel.trim() !== '') ? timezoneLabel : this.timezone ;
+
+        if(tmptimezone !== undefined && tmptimezone !== null && tmptimezone.trim() !== '' && this.timezone != this.localTimezone)
         {
             timezoneURLParam = '?timezone=' + encodeURI(tmptimezone);
         }
 
-        let timezoneLabel = this.timezoneLabels[this.timezone];
-        timezoneLabel = (timezoneLabel !== undefined && timezoneLabel !== null && timezoneLabel.trim() !== '') ? timezoneLabel : this.timezone ;
 
         for(let i=0;i<items.length;i++)
         {
@@ -62,11 +69,13 @@ export default class Ccbase extends LightningElement {
             eventInputVar.title = (items[i].Type !== undefined && items[i].Type !== null && items[i].Type.trim() !== '') ? items[i].Type + ': ' : '';
             eventInputVar.title += items[i].Subject;
             eventInputVar.type = items[i].Type;
-            eventInputVar.iconName = (items[i].cccalendar__Event_Icon_Name__c !== undefined && items[i].cccalendar__Event_Icon_Name__c !== null && items[i].cccalendar__Event_Icon_Name__c.trim() !== '') ? items[i].cccalendar__Event_Icon_Name__c !== undefined : 'utility:events';
+            eventInputVar.iconName = (items[i].cccalendar__Event_Icon_Name__c !== undefined && items[i].cccalendar__Event_Icon_Name__c !== null && items[i].cccalendar__Event_Icon_Name__c.trim() !== '') ? items[i].cccalendar__Event_Icon_Name__c : '';
             eventInputVar.eventURL = (items[i].cccalendar__Event_URL__c !== undefined && items[i].cccalendar__Event_URL__c !== null && items[i].cccalendar__Event_URL__c.trim() !== '') ? items[i].cccalendar__Event_URL__c : '';
             eventInputVar.eventURLText = (items[i].cccalendar__Event_URL_Text__c !== undefined && items[i].cccalendar__Event_URL_Text__c !== null && items[i].cccalendar__Event_URL_Text__c.trim() !== '') ? items[i].cccalendar__Event_URL_Text__c : '';
+            eventInputVar.eventURL2 = (items[i].cccalendar__Event_URL_2__c !== undefined && items[i].cccalendar__Event_URL_2__c !== null && items[i].cccalendar__Event_URL_2__c.trim() !== '') ? items[i].cccalendar__Event_URL_2__c : '';
+            eventInputVar.eventURLText2 = (items[i].cccalendar__Event_URL_Text_2__c !== undefined && items[i].cccalendar__Event_URL_Text_2__c !== null && items[i].cccalendar__Event_URL_Text_2__c.trim() !== '') ? items[i].cccalendar__Event_URL_Text_2__c : '';
             eventInputVar.eventImageURL = (items[i].cccalendar__Image_URL__c !== undefined && items[i].cccalendar__Image_URL__c !== null && items[i].cccalendar__Image_URL__c.trim() !== '') ? items[i].cccalendar__Image_URL__c : '';
-            eventInputVar.detailsURL = '/' + items[i].Id + timezoneURLParam;
+            eventInputVar.detailsURL = this.siteUrl + '/' + items[i].Id + timezoneURLParam;
             
             if(items[i].cccalendar__Calendar_Rendering__c !== undefined && items[i].cccalendar__Calendar_Rendering__c !== null && items[i].cccalendar__Calendar_Rendering__c.trim() !== '')
             {
@@ -164,7 +173,7 @@ export default class Ccbase extends LightningElement {
             } 
 
            
-           if(items[i].cccalendar__Display_Events_cccalendar__Local_Timezone__c && items[i].cccalendar__Local_Timezone__c !== undefined && items[i].cccalendar__Local_Timezone__c !== null && !eventInputVar.allDay)
+           if(items[i].cccalendar__Display_Events_Local_Timezone__c === true && items[i].cccalendar__Local_Timezone__c !== undefined && items[i].cccalendar__Local_Timezone__c !== null && eventInputVar.allDay === false)
             {
                 var localTimezoneLabel = this.timezoneLabels[items[i].cccalendar__Local_Timezone__c];
                 localTimezoneLabel = (localTimezoneLabel !== undefined && localTimezoneLabel !== null && localTimezoneLabel.trim() !== '') ? localTimezoneLabel : items[i].cccalendar__Local_Timezone__c;

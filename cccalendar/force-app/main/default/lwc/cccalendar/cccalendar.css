@@ -32,3 +32,30 @@
     background-color: var(--cccalendar-colorBackgroundButtonBrandDisabled, rgba(44, 62, 80, 0.65));
     border-color: var(--cccalendar-buttonColorBorderBrandDisabled, rgba(44, 62, 80, 0.65));
 }
+
+.fc-row {
+    --webkit-overflow-scrolling: touch;
+    max-height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+span.fc-title {
+    white-space: normal;
+    overflow: auto;
+    text-overflow: ellipsis;
+}
+
+.cccalendar_slds-modal__container
+{
+    width: 75%;
+    max-width: 75rem;
+}
+
+@media only screen and (max-device-width: 480px) {
+
+    .fc-toolbar h2 {
+        font-size: 1em;
+    }
+
+}

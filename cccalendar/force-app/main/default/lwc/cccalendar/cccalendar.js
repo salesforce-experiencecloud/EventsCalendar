@@ -8,7 +8,6 @@ import ccBase from 'c/ccbase';
 
 export default class Cccalendar extends ccBase {
 
-    @api timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     @api eventColor = 'Blue';
     @api pastMonths = 6;
     @api futureMonths = 6;
@@ -16,21 +15,28 @@ export default class Cccalendar extends ccBase {
     @api whatId = '';
     @api whoId = '';
     @api ownerId = '';
-    @api timezoneLabelsJSON = '{"America/Los_Angeles":"US Pacific Time","America/Chicago":"US Central Time","America/Denver":"US Mountain Time","America/Indianapolis":"US Eastern Time","GMT":"GMT","Asia/Jakarta":"Western Indonesian Time","Asia/Makassar":"Central Indonesian Time","Asia/Jayapura":"Eastern Indonesian Time","Asia/Kolkata":"India Standard Time","Asia/Tokyo":"Japan Time","Australia/Sydney":"Australian Eastern Standard Time","Australia/Darwin":"Australian Central Standard Time","Australia/Perth":"Australian Western Standard Time","Europe/London":"British Time","Europe/Paris":"Central European Time"}';
+    @api timezoneLabelsJSON = '';
     @api overrideTimezoneList = false;
     @api listofTimezonesOverride = 'America/Los_Angeles,America/Chicago,America/Denver,America/Indianapolis,GMT,Europe/London,Europe/Paris,Asia/Jakarta,Asia/Makassar,Asia/Jayapura,Asia/Kolkata,Asia/Tokyo,Australia/Sydney,Australia/Darwin,Australia/Perth';
+    @api hideEventDetailButton = false;
+    @api eventDetailButtonText = 'More Info';
+    @api showWeekends = false;
+    @api hideMonthView = false;
+    @api hideWeekView = false;
+    @api hideDayView = false;
+    @api hideListView = false;
 
     @track calendar;
     @track items;
     @track itemsMap;
-    @track timezoneLabels; 
     @track timezoneList;
     @track timezoneObjList;
     @track selectedEvent;
     @track eventDetailsModalOpen = false;
     @track escListener;
+    @track selectedViews = [];
 
-    localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    allViewsList = ['dayGridMonth','timeGridWeek','timeGridDay','listWeek'];
 
     connectedCallback()
     {
@@ -73,6 +79,7 @@ export default class Cccalendar extends ccBase {
                         })
                         .then((result) => {
                             try {
+
                                 let res = JSON.parse(result);
                                 this.itemsMap = res.eventsMap;
                                 this.items = Object.keys(this.itemsMap).map(
@@ -80,9 +87,13 @@ export default class Cccalendar extends ccBase {
                                         return this.itemsMap[key];
                                     });
                                 this.timezoneList = res.timezoneList;
+
+                                this.siteUrl = (res.siteUrl !== undefined && res.siteUrl !== null && res.siteUrl.trim() !== '') ? res.siteUrl : '';
+
                                 this.populateTimezoneSelectList();
-                                this.populateCalendarEvents(this.items, this.localTimezone);
+                                this.populateCalendarEvents(this.items);
                                 this.renderCalendar();
+
                             } catch(err1){
                                 if(this.isInSitePreview())
                                 {
@@ -95,7 +106,7 @@ export default class Cccalendar extends ccBase {
                             if(this.isInSitePreview())
                             {
                                 console.log(err2+'');
-                                this.showToast('Error', this.convertErrorToJSONString(err2), 'error','sticky');
+                                this.showToast('Error', this.convertErrorToJSONString(err2), 'error');
                             }
                         });
                 
@@ -156,8 +167,55 @@ export default class Cccalendar extends ccBase {
             var calendar = this.calendar;
             var eventColor = this.eventColor;
 
-            var defaultView = (this.checkMobile()) ? 'listWeek' : 'dayGridMonth';
-            var headerRight = (this.checkMobile()) ? 'timeGridDay,listWeek' : 'dayGridMonth,timeGridWeek,timeGridDay,listWeek';
+            var isMobile = this.checkMobile();
+            for(let i=0;i<this.allViewsList.length;i++)
+            {
+                if(this.allViewsList[i] === 'dayGridMonth' && this.hideMonthView === false && isMobile === false)
+                {
+                    this.selectedViews.push(this.allViewsList[i]);
+                }
+                else if(this.allViewsList[i] === 'timeGridWeek' && this.hideWeekView === false && isMobile === false)
+                {
+                    this.selectedViews.push(this.allViewsList[i]);
+                }
+                else if(this.allViewsList[i] === 'timeGridDay' && this.hideDayView === false)
+                {
+                    this.selectedViews.push(this.allViewsList[i]);
+                }
+                else if(this.allViewsList[i] === 'listWeek' && this.hideListView === false)
+                {
+                    this.selectedViews.push(this.allViewsList[i]);
+                }
+            }
+
+            var defaultView;
+            if(this.selectedViews.length > 0)
+            {
+                if(this.selectedViews.includes('listWeek') === false && this.selectedViews.includes('timeGridDay') === false)
+                {
+                    throw "You must choose at least one view to show on mobile (You cannot hide both Day and List views).";
+                }
+
+                if(isMobile === false)
+                {
+                    defaultView = this.selectedViews[0];
+                }
+                else if(isMobile === true && this.selectedViews.includes('listWeek') === true)
+                {
+                    defaultView = 'listWeek';
+                }
+                else if(isMobile === true && this.selectedViews.includes('timeGridDay') === true)
+                {
+                    defaultView = 'timeGridDay';
+                }
+                
+            }
+            else 
+            {
+                throw "You must choose at least one view to show.";
+            }
+
+            var headerRight = this.selectedViews.join(',');
 
             if(calendar !== undefined && calendar !== null)
             {
@@ -169,7 +227,7 @@ export default class Cccalendar extends ccBase {
                 defaultView: defaultView,
                 //defaultDate: '2019-06-07',
                 eventColor: eventColor,
-                weekends: false,
+                weekends: this.showWeekends,
                 height: 'auto',
                 header: {
                 left: 'prev,next,today',
@@ -179,13 +237,19 @@ export default class Cccalendar extends ccBase {
                 timeZone: selectedTimezone,
                 events: eventsJSONObj,
                 dayClick: (info) => {
-                    info.preventDefault();
+                    try{
+                        info.preventDefault();
+                    } catch(err){}
                 },
                 eventClick: (info) => {
-                    info.preventDefault();
+                    try{
+                        info.preventDefault();
+                    } catch(err){}
                 },
                 dateClick: (info) => {
-                    info.preventDefault();
+                    try{
+                        info.preventDefault();
+                    } catch(err){}
                 },
                 eventRender: (info) =>
                 {
@@ -242,7 +306,12 @@ export default class Cccalendar extends ccBase {
             for(var i=0;i<buttonList.length;i++)
             {
                 buttonList[i].tabIndex = "-1";
-                buttonList[i].addEventListener('mousedown',function(ev){ev.preventDefault();});
+                buttonList[i].addEventListener('mousedown',
+                    function(ev){
+                        try{
+                            ev.preventDefault();
+                        } catch(err){}
+                    });
             }
 
         } catch(err){
@@ -291,7 +360,7 @@ export default class Cccalendar extends ccBase {
     handleTimezoneChange(e)
     {
         this.timezone = e.detail.value;
-        this.populateCalendarEvents(this.items, this.localTimezone);
+        this.populateCalendarEvents(this.items);
         this.renderCalendar();
     }
 
