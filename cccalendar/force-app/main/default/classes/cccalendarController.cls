@@ -3,6 +3,20 @@ global with sharing class cccalendarController {
     @AuraEnabled
     global static String getEvents(Integer pastMonths, Integer futureMonths, Integer eventLimit, String whatId, String whoId, String ownerId, String recordId)
     {
+        Map<String,Object> resultMap = new Map<String,Object>();
+        Boolean eventAccess = Event.sObjectType.getDescribe().isAccessible();
+        Boolean eventFLS = checkEventFLSisAccessible();
+        String accessError = '';
+        accessError += (!eventAccess) ? 'Profile has no access to Event/Activities object. Enable the "Access Activities" permission on the profile. ' : '';
+        accessError += (!eventFLS) ? 'Profile does not have proper FLS access to Event object. Grant Read Access to the fields on the Event object for the profile.' : '';
+        if(!eventAccess
+                || !eventFLS
+            )
+        {
+            resultMap.put('error', accessError);
+            return System.JSON.serialize(resultMap);
+        }
+
         Id whatIdID;
         if(whatId != null && whatId.trim() != '')
         {
@@ -35,7 +49,6 @@ global with sharing class cccalendarController {
             }catch(Exception e){}
         }
 
-        Map<String,Object> resultMap = new Map<String,Object>();
         String query = 'SELECT ';
         
         String fields = 'Id,IsAllDayEvent,ActivityDate,Description,EndDateTime,Location,StartDateTime,Subject,Type,';
@@ -90,6 +103,32 @@ global with sharing class cccalendarController {
             timezoneList.add(pe.getValue());
         }
         return timezoneList;
+    }
+
+    private static Boolean checkEventFLSisAccessible()
+    {
+        return (
+            Schema.sObjectType.Event.fields.Subject.isAccessible()
+            && Schema.sObjectType.Event.fields.IsAllDayEvent.isAccessible()
+            && Schema.sObjectType.Event.fields.ActivityDate.isAccessible()
+            && Schema.sObjectType.Event.fields.Description.isAccessible()
+            && Schema.sObjectType.Event.fields.EndDateTime.isAccessible()
+            && Schema.sObjectType.Event.fields.Location.isAccessible()
+            && Schema.sObjectType.Event.fields.StartDateTime.isAccessible()
+            && Schema.sObjectType.Event.fields.Type.isAccessible()
+            && Schema.sObjectType.Event.fields.cccalendar__Calendar_Background_Color__c.isAccessible()
+            && Schema.sObjectType.Event.fields.cccalendar__Calendar_Border_Color__c.isAccessible()
+            && Schema.sObjectType.Event.fields.cccalendar__Calendar_Rendering__c.isAccessible()
+            && Schema.sObjectType.Event.fields.cccalendar__Calendar_Text_Color__c.isAccessible()
+            && Schema.sObjectType.Event.fields.cccalendar__Display_Events_Local_Timezone__c.isAccessible()
+            && Schema.sObjectType.Event.fields.cccalendar__Event_URL__c.isAccessible()
+            && Schema.sObjectType.Event.fields.cccalendar__Event_URL_Text__c.isAccessible()
+            && Schema.sObjectType.Event.fields.cccalendar__Event_URL_2__c.isAccessible()
+            && Schema.sObjectType.Event.fields.cccalendar__Event_URL_Text_2__c.isAccessible()
+            && Schema.sObjectType.Event.fields.cccalendar__Image_URL__c.isAccessible()
+            && Schema.sObjectType.Event.fields.cccalendar__Local_Timezone__c.isAccessible()
+            && Schema.sObjectType.Event.fields.cccalendar__Event_Icon_Name__c.isAccessible()
+        );
     }
 
 

@@ -81,18 +81,25 @@ export default class Cccalendar extends ccBase {
                             try {
 
                                 let res = JSON.parse(result);
-                                this.itemsMap = res.eventsMap;
-                                this.items = Object.keys(this.itemsMap).map(
-                                    (key) => {
-                                        return this.itemsMap[key];
-                                    });
-                                this.timezoneList = res.timezoneList;
+                                if(res.error === undefined || res.error === null || res.error.trim() === '')
+                                {
+                                    this.itemsMap = res.eventsMap;
+                                    this.items = Object.keys(this.itemsMap).map(
+                                        (key) => {
+                                            return this.itemsMap[key];
+                                        });
+                                    this.timezoneList = res.timezoneList;
 
-                                this.siteUrl = (res.siteUrl !== undefined && res.siteUrl !== null && res.siteUrl.trim() !== '') ? res.siteUrl : '';
+                                    this.siteUrl = (res.siteUrl !== undefined && res.siteUrl !== null && res.siteUrl.trim() !== '') ? res.siteUrl : '';
 
-                                this.populateTimezoneSelectList();
-                                this.populateCalendarEvents(this.items);
-                                this.renderCalendar();
+                                    this.populateTimezoneSelectList();
+                                    this.populateCalendarEvents(this.items);
+                                    this.renderCalendar();
+                                }
+                                else
+                                {
+                                    console.log('Error: ' + res.error);
+                                }
 
                             } catch(err1){
                                 if(this.isInSitePreview())
