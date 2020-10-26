@@ -99,20 +99,24 @@ export default class Cccalendar extends ccBase {
                                 else
                                 {
                                     console.log('Error: ' + res.error);
+                                    if(this.isInSitePreview())
+                                    {
+                                        this.showToast('Error', this.convertErrorToJSONString(res.error), 'error');
+                                    }
                                 }
 
                             } catch(err1){
+                                console.log(err1+'');
                                 if(this.isInSitePreview())
                                 {
-                                    console.log(err1+'');
                                     this.showToast('Error', this.convertErrorToJSONString(err1), 'error');
                                 }
                             }
                         })
                         .catch((err2) => {
+                            console.log(err2+'');
                             if(this.isInSitePreview())
                             {
-                                console.log(err2+'');
                                 this.showToast('Error', this.convertErrorToJSONString(err2), 'error');
                             }
                         });
@@ -120,17 +124,17 @@ export default class Cccalendar extends ccBase {
                     }
                     
                 } catch(err3) {
+                    console.log(err3+'');
                     if(this.isInSitePreview())
                     {
-                        console.log(err3+'');
                         this.showToast('Error', JSON.stringify(err3).replaceAll('{','').replaceAll('}',''), 'error');
                     }
                 }
             });
           }).catch( (err4) => {
+            console.log(err4+'');
             if(this.isInSitePreview())
             {
-                console.log(err4+'');
                 this.showToast('Error', JSON.stringify(err4).replaceAll('{','').replaceAll('}',''), 'error');
             }
           });
