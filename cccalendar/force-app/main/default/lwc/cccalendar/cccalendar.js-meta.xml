@@ -2,8 +2,8 @@
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>48.0</apiVersion>
     <isExposed>true</isExposed>
-    <masterLabel>Calendar for Community Cloud</masterLabel>
-    <description>Calendar for Community Cloud</description>
+    <masterLabel>Calendar for Experience Cloud</masterLabel>
+    <description>Calendar for Experience Cloud</description>
     <targets>
         <target>lightningCommunity__Page</target>
         <target>lightningCommunity__Default</target>
