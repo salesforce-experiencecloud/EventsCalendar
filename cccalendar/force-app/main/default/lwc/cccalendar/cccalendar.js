@@ -45,101 +45,97 @@ export default class Cccalendar extends ccBase {
                 'keydown',
                 this.escListener
             );
-    }
 
-    renderedCallback()
-    {
-        Promise.all([
-            loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/core/main.min.css'),
-            loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/bootstrap/main.min.css'),
-            loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/daygrid/main.min.css'),
-            loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/timegrid/main.min.css'),
-            loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/list/main.min.css'),
-            loadScript(this, jquery341 + '/jquery.min.js'),
-            loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/core/main.js')
-          ]).then(() => {
             Promise.all([
-                
-                loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/daygrid/main.min.js'),
-                loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/interaction/main.min.js'),
-                loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/timegrid/main.min.js'),
-                loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/list/main.min.js')
-            ]).then(() => {
-                try {
-                    if(this.items === undefined || this.items === null || this.items.length === 0)
-                    {
-                        fetchEvents({
-                            pastMonths: this.pastMonths,
-                            futureMonths: this.futureMonths,
-                            eventLimit: this.eventLimit,
-                            whatId: this.whatId,
-                            whoId: this.whoId,
-                            ownerId: this.ownerId
-
-                        })
-                        .then((result) => {
-                            try {
-
-                                let res = JSON.parse(result);
-                                if(res.error === undefined || res.error === null || res.error.trim() === '')
-                                {
-                                    this.itemsMap = res.eventsMap;
-                                    this.items = Object.keys(this.itemsMap).map(
-                                        (key) => {
-                                            return this.itemsMap[key];
-                                        });
-                                    this.timezoneList = res.timezoneList;
-
-                                    this.siteUrl = (res.siteUrl !== undefined && res.siteUrl !== null && res.siteUrl.trim() !== '') ? res.siteUrl : '';
-
-                                    this.populateTimezoneSelectList();
-                                    this.populateCalendarEvents(this.items);
-                                    this.renderCalendar();
-                                }
-                                else
-                                {
-                                    console.log('Error: ' + res.error);
+                loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/core/main.min.css'),
+                loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/bootstrap/main.min.css'),
+                loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/daygrid/main.min.css'),
+                loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/timegrid/main.min.css'),
+                loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/list/main.min.css'),
+                loadScript(this, jquery341 + '/jquery.min.js'),
+                loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/core/main.js')
+              ]).then(() => {
+                Promise.all([
+                    
+                    loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/daygrid/main.min.js'),
+                    loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/interaction/main.min.js'),
+                    loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/timegrid/main.min.js'),
+                    loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/list/main.min.js')
+                ]).then(() => {
+                    try {
+                        if(this.items === undefined || this.items === null || this.items.length === 0)
+                        {
+                            fetchEvents({
+                                pastMonths: this.pastMonths,
+                                futureMonths: this.futureMonths,
+                                eventLimit: this.eventLimit,
+                                whatId: this.whatId,
+                                whoId: this.whoId,
+                                ownerId: this.ownerId
+    
+                            })
+                            .then((result) => {
+                                try {
+    
+                                    let res = JSON.parse(result);
+                                    if(res.error === undefined || res.error === null || res.error.trim() === '')
+                                    {
+                                        this.itemsMap = res.eventsMap;
+                                        this.items = Object.keys(this.itemsMap).map(
+                                            (key) => {
+                                                return this.itemsMap[key];
+                                            });
+                                        this.timezoneList = res.timezoneList;
+    
+                                        this.siteUrl = (res.siteUrl !== undefined && res.siteUrl !== null && res.siteUrl.trim() !== '') ? res.siteUrl : '';
+    
+                                        this.populateTimezoneSelectList();
+                                        this.populateCalendarEvents(this.items);
+                                        this.renderCalendar();
+                                    }
+                                    else
+                                    {
+                                        console.log('Error: ' + res.error);
+                                        if(this.isInSitePreview())
+                                        {
+                                            this.showToast('Error', this.convertErrorToJSONString(res.error), 'error');
+                                        }
+                                    }
+    
+                                } catch(err1){
+                                    console.log(err1+'');
                                     if(this.isInSitePreview())
                                     {
-                                        this.showToast('Error', this.convertErrorToJSONString(res.error), 'error');
+                                        this.showToast('Error', this.convertErrorToJSONString(err1), 'error');
                                     }
                                 }
-
-                            } catch(err1){
-                                console.log(err1+'');
+                            })
+                            .catch((err2) => {
+                                console.log(err2+'');
                                 if(this.isInSitePreview())
                                 {
-                                    this.showToast('Error', this.convertErrorToJSONString(err1), 'error');
+                                    this.showToast('Error', this.convertErrorToJSONString(err2), 'error');
                                 }
-                            }
-                        })
-                        .catch((err2) => {
-                            console.log(err2+'');
-                            if(this.isInSitePreview())
-                            {
-                                this.showToast('Error', this.convertErrorToJSONString(err2), 'error');
-                            }
-                        });
-                
-                    }
+                            });
                     
-                } catch(err3) {
-                    console.log(err3+'');
-                    if(this.isInSitePreview())
-                    {
-                        this.showToast('Error', JSON.stringify(err3).replaceAll('{','').replaceAll('}',''), 'error');
+                        }
+                        
+                    } catch(err3) {
+                        console.log(err3+'');
+                        if(this.isInSitePreview())
+                        {
+                            this.showToast('Error', JSON.stringify(err3).replaceAll('{','').replaceAll('}',''), 'error');
+                        }
                     }
+                });
+              }).catch( (err4) => {
+                console.log(err4+'');
+                if(this.isInSitePreview())
+                {
+                    this.showToast('Error', JSON.stringify(err4).replaceAll('{','').replaceAll('}',''), 'error');
                 }
-            });
-          }).catch( (err4) => {
-            console.log(err4+'');
-            if(this.isInSitePreview())
-            {
-                this.showToast('Error', JSON.stringify(err4).replaceAll('{','').replaceAll('}',''), 'error');
-            }
-          });
+              });
 
-          
     }
 
     populateTimezoneSelectList()
