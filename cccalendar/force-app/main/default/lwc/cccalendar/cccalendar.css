@@ -11,11 +11,6 @@
 
 }
 
-.modalContainer
-{
-    height: 800px;
-}
-
 .fc-button
 {
     background-color: var(--cccalendar-colorBackgroundButtonBrand, #2574A9);
