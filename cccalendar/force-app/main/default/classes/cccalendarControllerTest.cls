@@ -4,27 +4,49 @@ public class cccalendarControllerTest {
     @testSetup static void testSetupMethod()
     {
         Account acc = new Account();
-        acc.Name = 'test';
-        insert acc;
+        if(Schema.sObjectType.Account.fields.Name.isCreateable() && Schema.sObjectType.Account.isCreateable())
+        {
+            acc.Name = 'test';
+            insert acc;
+        }
 
         Contact con = new Contact();
-        con.firstName = 'testF';
-        con.lastName = 'testL';
-        insert con;
+        if(Schema.sObjectType.Contact.fields.FirstName.isCreateable() && 
+        Schema.sObjectType.Contact.fields.LastName.isCreateable() && 
+        Schema.sObjectType.Contact.fields.AccountId.isCreateable() && Schema.sObjectType.Contact.isCreateable())
+        {
+            con.firstName = 'testF';
+            con.lastName = 'testL';
+            con.accountId = acc.Id;
+            insert con;
+        }
 
         Event ev = new Event();
-        ev.Subject = 'test';
-        ev.WhoId = con.Id;
-        ev.WhatId = acc.Id;
-        ev.OwnerId = System.UserInfo.getUserId();
-        ev.StartDateTime=system.today();
-        ev.EndDateTime=system.today()+5;
+        if(Schema.sObjectType.Event.fields.Subject.isCreateable() && 
+        Schema.sObjectType.Event.fields.WhoId.isCreateable() && 
+        Schema.sObjectType.Event.fields.WhatId.isCreateable() && 
+        Schema.sObjectType.Event.fields.OwnerId.isCreateable() && 
+        Schema.sObjectType.Event.fields.StartDateTime.isCreateable() && 
+        Schema.sObjectType.Event.fields.EndDateTime.isCreateable() && Schema.sObjectType.Event.isCreateable())
+        {
+            ev.Subject = 'test';
+            ev.WhoId = con.Id;
+            ev.WhatId = acc.Id;
+            ev.OwnerId = System.UserInfo.getUserId();
+            ev.StartDateTime=system.today();
+            ev.EndDateTime=system.today()+5;
 
-        insert ev;
+            insert ev;
+        }
+        
     }
 
     public static testMethod void test_success_cccalendarController()
     {
+        System.assertEquals(true, Schema.sObjectType.Account.fields.Name.isAccessible() && Schema.sObjectType.Account.isAccessible());
+        System.assertEquals(true, Schema.sObjectType.Contact.fields.FirstName.isAccessible() && Schema.sObjectType.Contact.fields.LastName.isAccessible() && Schema.sObjectType.Contact.isAccessible());
+        System.assertEquals( true, Schema.sObjectType.Event.fields.Subject.isAccessible() && Schema.sObjectType.Event.isAccessible());
+
         Account acc = [SELECT Id from Account WHERE Name = 'test' LIMIT 1];
         Contact con = [Select Id from contact where FirstName = 'testF' and LastName = 'testL' LIMIT 1];
         Event ev = [Select Id from event where subject = 'test' LIMIT 1];
