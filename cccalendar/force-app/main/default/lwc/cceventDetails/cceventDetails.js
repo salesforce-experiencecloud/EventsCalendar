@@ -11,11 +11,27 @@ export default class CceventDetails extends ccBase {
     @api timezoneLabelsJSON = '';
     @api hideEventDetailButton = false;
     @api eventDetailButtonText = 'More Info';
+    @api truncate = false;
+    @api noHeaderBorder = false;
+
+    @track stylesSet = false;
 
     @api 
     get eventDetailSectionSize()
     {
         return (this.event !== undefined && this.event.eventImageURL !== undefined && this.event.eventImageURL !== null && this.event.eventImageURL.trim() !== '') ? '8' : '12' ;
+    }
+
+    @api 
+    get divFormElementClasses()
+    {
+        return (this.truncate) ? 'slds-form-element slds-truncate' : 'slds-form-element' ;
+    }
+
+    @api
+    get headerClasses()
+    {
+        return (this.noHeaderBorder) ? 'eventHeader noHeaderBorder slds-modal__header' : 'eventHeader slds-modal__header' ;
     }
 
     connectedCallback()
@@ -73,6 +89,7 @@ export default class CceventDetails extends ccBase {
                 }
             });
         }
+
     }
 
     handleCloseDetailsModal(e)
@@ -80,6 +97,19 @@ export default class CceventDetails extends ccBase {
         e.preventDefault();
         const closeModalDetailsEvent = new CustomEvent('closedetailsmodalevent');
         this.dispatchEvent(closeModalDetailsEvent);
+    }
+
+    renderedCallback()
+    {
+        if(this.event !== undefined && this.event !== null && this.stylesSet === false)     
+        {
+            let cccalendarEventIconSpan = this.template.querySelector('span[role="cccalendarEventIconSpan"]');
+            if(cccalendarEventIconSpan !== undefined && cccalendarEventIconSpan !== null)
+            {
+                cccalendarEventIconSpan.style.setProperty('--lwc-colorTextIconDefault', this.event.backgroundColor);
+                this.stylesSet = true;
+            }
+        }
     }
 
 }

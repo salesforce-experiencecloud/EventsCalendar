@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Event_URL_Text__c</fullName>
+    <fullName>Event_URL_2__c</fullName>
     <deprecated>false</deprecated>
-    <description>Text to display on button linking to event URL field</description>
+    <description>Button link on Event</description>
     <externalId>false</externalId>
-    <inlineHelpText>Text to display on button linking to event URL field</inlineHelpText>
-    <label>Event URL Text</label>
+    <inlineHelpText>Button link on Event</inlineHelpText>
+    <label>Event URL 2</label>
     <length>255</length>
     <required>false</required>
     <type>Text</type>

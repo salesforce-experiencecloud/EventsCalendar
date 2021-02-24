@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Calendar_Rendering__c</fullName>
     <defaultValue>&quot;Normal&quot;</defaultValue>
+    <deprecated>false</deprecated>
     <description>Mode to render event with on Calendar: The rendering type of this event. Can be empty (normal rendering), &quot;background&quot;, or &quot;inverse-background&quot;</description>
     <externalId>false</externalId>
     <inlineHelpText>Mode to render event with on Calendar: The rendering type of this event. Can be empty (normal rendering), &quot;background&quot;, or &quot;inverse-background&quot;</inlineHelpText>

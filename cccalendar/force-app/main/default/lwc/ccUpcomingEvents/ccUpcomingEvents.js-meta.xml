@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Calendar Upcoming Events</masterLabel>
+    <description>Calendar Upcoming Events</description>
+    <capabilities>
+        <capability>lightningCommunity__RelaxedCSP</capability>
+    </capabilities>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="eventLimit" type="Integer" label="Max number of events to retrieve" required="true" default="10" description="Set the maximum number of events to retrieve."/>
+            <property name="whatId" type="String" label="What Id / Related To Filter" required="false" default="" description="If set, the events will be filtered on the What Id / Related To field."/>
+            <property name="whoId" type="String" label="Who Id / Name Filter" required="false" default="" description="If set, the events will be filtered on the Who Id / Name field."/>
+            <property name="ownerId" type="String" label="Owner Id / Assigned To Filter" required="false" default="" description="If set, the events will be filtered on the Owner Id / Assigned To field."/>
+            <property name="eventDetailButtonText" type="String" label="Event Detail Button Text" required="false" default="More Info" description="Text for the event detail button, defaults to 'More Info'."/>
+            <property name="timezoneLabelsJSON" type="String" label="Timezone Labels JSON" required="false" default="{&quot;America/Los_Angeles&quot;:&quot;US Pacific Time&quot;,&quot;America/Chicago&quot;:&quot;US Central Time&quot;,&quot;America/Denver&quot;:&quot;US Mountain Time&quot;,&quot;America/Indianapolis&quot;:&quot;US Eastern Time&quot;,&quot;GMT&quot;:&quot;GMT&quot;,&quot;Asia/Jakarta&quot;:&quot;Western Indonesian Time&quot;,&quot;Asia/Makassar&quot;:&quot;Central Indonesian Time&quot;,&quot;Asia/Jayapura&quot;:&quot;Eastern Indonesian Time&quot;,&quot;Asia/Kolkata&quot;:&quot;India Standard Time&quot;,&quot;Asia/Tokyo&quot;:&quot;Japan Time&quot;,&quot;Australia/Sydney&quot;:&quot;Australian Eastern Standard Time&quot;,&quot;Australia/Darwin&quot;:&quot;Australian Central Standard Time&quot;,&quot;Australia/Perth&quot;:&quot;Australian Western Standard Time&quot;,&quot;Europe/London&quot;:&quot;British Time&quot;,&quot;Europe/Paris&quot;:&quot;Central European Time&quot;}" description="JSON String representing a map of labels of timezones. Example: {&quot;America/Los_Angeles&quot;:&quot;US Pacific Time&quot;,&quot;America/Chicago&quot;:&quot;US Central Time&quot;,&quot;America/Denver&quot;:&quot;US Mountain Time&quot;,&quot;America/Indianapolis&quot;:&quot;US Eastern Time&quot;,&quot;GMT&quot;:&quot;GMT&quot;,&quot;Asia/Jakarta&quot;:&quot;Western Indonesian Time&quot;,&quot;Asia/Makassar&quot;:&quot;Central Indonesian Time&quot;,&quot;Asia/Jayapura&quot;:&quot;Eastern Indonesian Time&quot;,&quot;Asia/Kolkata&quot;:&quot;India Standard Time&quot;,&quot;Asia/Tokyo&quot;:&quot;Japan Time&quot;,&quot;Australia/Sydney&quot;:&quot;Australian Eastern Standard Time&quot;,&quot;Australia/Darwin&quot;:&quot;Australian Central Standard Time&quot;,&quot;Australia/Perth&quot;:&quot;Australian Western Standard Time&quot;,&quot;Europe/London&quot;:&quot;British Time&quot;,&quot;Europe/Paris&quot;:&quot;Central European Time&quot;}"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

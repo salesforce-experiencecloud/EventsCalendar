@@ -1,18 +1,20 @@
 <template>
     
     <template if:true={event}>
-        <header class="eventHeader slds-modal__header">
+        <header class={headerClasses}>
             <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={handleCloseDetailsModal} if:true={isModal}>
                 <lightning-icon icon-name="utility:close" size="medium" variant="inverse">
                 </lightning-icon>
                 <span class="slds-assistive-text">Close</span>
             </button>
             <div class="titleDiv slds-size--1-of-1">
-                <span class="slds-m-right_small" if:true={event.iconName}>
+                <span role="cccalendarEventIconSpan" class="slds-m-right_small" if:true={event.iconName}>
                     <lightning-icon icon-name={event.iconName} 
                         alternative-text={event.title} size="small"></lightning-icon>
                 </span>
-                <h2 class="slds-text-heading_medium slds-hyphenate">{event.title}</h2>
+                <div class={divFormElementClasses}>
+                    <h2 class="slds-text-heading_medium slds-hyphenate">{event.title}</h2>
+                </div>
             </div>
             <div class="subtitleDiv slds-size--1-of-1">
                 <h2 class="slds-text-heading_x-small slds-hyphenate">{event.subtitleText}</h2>
@@ -59,11 +61,11 @@
                 </lightning-layout-item>
                 <lightning-layout-item padding="around-small" size="12" large-device-size={eventDetailSectionSize} medium-device-size={eventDetailSectionSize} small-device-size="12">
 
-                    <div class="slds-form-element" if:true={event.location}>
+                    <div class={divFormElementClasses} if:true={event.location}>
                         <label class="slds-form-element__label">Location:</label>
                         {event.location}
                     </div>
-                    <div class="slds-form-element" if:true={event.description}>
+                    <div class={divFormElementClasses} if:true={event.description}>
                         <label class="slds-form-element__label">Description:</label>
                         <lightning-formatted-text linkify="true" value={event.description}></lightning-formatted-text>
                         

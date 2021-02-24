@@ -3,6 +3,23 @@ global with sharing class cccalendarController {
     @AuraEnabled
     global static String getEvents(Integer pastMonths, Integer futureMonths, Integer eventLimit, String whatId, String whoId, String ownerId, String recordId)
     {
+        return getEventsPrivate(pastMonths, futureMonths, 'MONTH', eventLimit, whatId, whoId, ownerId, recordId, 'ASC');
+    }
+
+    @AuraEnabled
+    global static String getEventsWithFrequency(Integer pastMonths, Integer futureMonths, String rangeFrequency, Integer eventLimit, String whatId, String whoId, String ownerId, String recordId)
+    {
+        return getEventsPrivate(pastMonths, futureMonths, rangeFrequency, eventLimit, whatId, whoId, ownerId, recordId, 'ASC');
+    }
+
+    @AuraEnabled
+    global static String getUpcomingEvents(Integer eventLimit, String whatId, String whoId, String ownerId, String recordId)
+    {
+        return getEventsPrivate(0, 0, 'MONTH', eventLimit, whatId, whoId, ownerId, recordId, 'ASC');
+    }
+
+    private static String getEventsPrivate(Integer pastMonths, Integer futureMonths, String rangeFrequency, Integer eventLimit, String whatId, String whoId, String ownerId, String recordId, String startDateTimeOrder)
+    {
         Map<String,Object> resultMap = new Map<String,Object>();
         Boolean eventAccess = Event.sObjectType.getDescribe().isAccessible();
         Boolean eventFLS = checkEventFLSisAccessible();
@@ -49,6 +66,11 @@ global with sharing class cccalendarController {
             }catch(Exception e){}
         }
 
+        if(startDateTimeOrder == null || (startDateTimeOrder != 'ASC' && startDateTimeOrder != 'DESC') )
+        {
+            startDateTimeOrder = 'ASC';
+        }
+
         String query = 'SELECT ';
         
         String fields = 'Id,IsAllDayEvent,ActivityDate,Description,EndDateTime,Location,StartDateTime,Subject,Type,';
@@ -57,17 +79,63 @@ global with sharing class cccalendarController {
         fields += 'cccalendar__Event_URL_2__c, cccalendar__Event_URL_Text_2__c, cccalendar__Image_URL__c,cccalendar__Local_Timezone__c, cccalendar__Event_Icon_Name__c';
 
         query += fields;
-        query += ' FROM Event WHERE ';
-        query += ' ((EndDateTime >= LAST_N_MONTHS:' + String.valueOf(pastMonths) + ' AND ';
-        query += ' EndDateTime <= NEXT_N_MONTHS:' + String.valueOf(futureMonths) + ') OR EndDateTime = TODAY)';
 
+        List<String> whereConditions = new List<String>();
 
-        query += (whatIdID != null) ? ' AND whatId = \'' + whatIdID + '\' ' : '';
-        query += (whoIdID != null) ? ' AND whoId = \'' + whoIdID + '\' ' : '';
-        query += (ownerIdID != null) ? ' AND ownerId = \'' + ownerIdID + '\' ' : '';
-        query += (recordIdID != null) ? ' AND Id = \'' + recordIdID + '\' ' : '';
+        query += ' FROM Event';
         
-        query += ' ORDER BY StartDateTime ASC';
+        String pastRangeFrequency = (rangeFrequency != null && rangeFrequency == 'DAY') ? 'LAST_N_DAYS:' : 'LAST_N_MONTHS:';
+        String futureRangeFrequency = (rangeFrequency != null && rangeFrequency == 'DAY') ? 'NEXT_N_DAYS:' : 'NEXT_N_MONTHS:';
+
+        if(pastMonths != 0 && futureMonths != 0)
+        {
+            String monthRange = '((EndDateTime >= ' + pastRangeFrequency + String.valueOf(pastMonths) + ' AND ';
+            monthRange += 'EndDateTime <= ' + futureRangeFrequency + String.valueOf(futureMonths) + ') OR EndDateTime = TODAY)';
+            whereConditions.add(monthRange);
+        }
+        else if(pastMonths != 0 && futureMonths == 0)
+        {
+            String monthRange = '(EndDateTime >= ' + pastRangeFrequency + String.valueOf(pastMonths);
+            monthRange += ' AND EndDateTime <= TODAY)';
+            whereConditions.add(monthRange);
+        }
+        else if(pastMonths == 0 && futureMonths != 0)
+        {
+            String monthRange = '(EndDateTime <= ' + futureRangeFrequency + String.valueOf(futureMonths) + ' AND EndDateTime >= TODAY)';
+            whereConditions.add(monthRange);
+        }
+        else if(pastMonths == 0 && futureMonths == 0)
+        {
+            String monthRange = 'EndDateTime >= TODAY';
+            whereConditions.add(monthRange);
+        }
+
+        if(whatIdID != null)
+        {
+            whereConditions.add('whatId = \'' + whatIdID + '\' ');
+        }
+
+        if(whoIdID != null)
+        {
+            whereConditions.add('whoId = \'' + whoIdID + '\' ');
+        }
+
+        if(ownerIdID != null)
+        {
+            whereConditions.add('ownerId = \'' + ownerIdID + '\' ');
+        }
+
+        if(recordIdID != null)
+        {
+            whereConditions.add('Id = \'' + recordIdID + '\' ');
+        }
+
+        if(whereConditions.size() > 0)
+        {
+            query += ' WHERE ' + String.join(whereConditions,' AND ');
+        }
+        
+        query += ' ORDER BY StartDateTime ' + startDateTimeOrder;
         
         query += ' LIMIT ' + String.valueOf(eventLimit);
 
@@ -79,18 +147,8 @@ global with sharing class cccalendarController {
         resultMap.put('timezoneList',getTimezones());
         resultMap.put('siteUrl', System.Site.getBaseUrl());
 
-        /*
-        List<SiteDetail> siteDetailList = [SELECT DurableId, SecureUrl FROM SiteDetail WHERE DurableId = :System.Site.getSiteId()];
-        if(siteDetailList.size() > 0)
-        {
-            resultMap.put('siteUrl', siteDetailList[0].SecureUrl);
-            
-        }
-        */
-
         return System.JSON.serialize(resultMap);
     }
-
 
     private static List<String> getTimezones()
     {

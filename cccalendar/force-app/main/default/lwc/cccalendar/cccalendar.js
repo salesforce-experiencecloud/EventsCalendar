@@ -1,8 +1,8 @@
 import { api, track } from 'lwc';
 import {loadStyle, loadScript} from 'lightning/platformResourceLoader';
 import fullCalendar from '@salesforce/resourceUrl/fullcalendar420';
-import jquery341 from '@salesforce/resourceUrl/jquery341';
-import fetchEvents from '@salesforce/apex/cccalendarController.getEvents';
+import jquery from '@salesforce/resourceUrl/jquery';
+import fetchEvents from '@salesforce/apex/cccalendarController.getEventsWithFrequency';
 import ccBase from 'c/ccbase';
 
 
@@ -25,6 +25,7 @@ export default class Cccalendar extends ccBase {
     @api hideWeekView = false;
     @api hideDayView = false;
     @api hideListView = false;
+    @api rangeFrequency = 'MONTH';
 
     @track calendar;
     @track items;
@@ -52,7 +53,7 @@ export default class Cccalendar extends ccBase {
                 loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/daygrid/main.min.css'),
                 loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/timegrid/main.min.css'),
                 loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/list/main.min.css'),
-                loadScript(this, jquery341 + '/jquery.min.js'),
+                loadScript(this, jquery),
                 loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/core/main.js')
               ]).then(() => {
                 Promise.all([
@@ -68,6 +69,7 @@ export default class Cccalendar extends ccBase {
                             fetchEvents({
                                 pastMonths: this.pastMonths,
                                 futureMonths: this.futureMonths,
+                                rangeFrequency: this.rangeFrequency,
                                 eventLimit: this.eventLimit,
                                 whatId: this.whatId,
                                 whoId: this.whoId,
@@ -84,7 +86,7 @@ export default class Cccalendar extends ccBase {
                                         this.items = Object.keys(this.itemsMap).map(
                                             (key) => {
                                                 return this.itemsMap[key];
-                                            });
+                                            }).reverse();
                                         this.timezoneList = res.timezoneList;
     
                                         this.siteUrl = (res.siteUrl !== undefined && res.siteUrl !== null && res.siteUrl.trim() !== '') ? res.siteUrl : '';
@@ -369,6 +371,13 @@ export default class Cccalendar extends ccBase {
         this.timezone = e.detail.value;
         this.populateCalendarEvents(this.items);
         this.renderCalendar();
+        const timeZoneEvent = new CustomEvent('CCCALENDAR_TIMEZONE_CHANGE', 
+            { 
+                detail: {
+                    timezone: this.timezone 
+                }
+            });
+        window.dispatchEvent(timeZoneEvent);
     }
 
 

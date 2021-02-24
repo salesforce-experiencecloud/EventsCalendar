@@ -8,6 +8,10 @@
     text-align: left;
 }
 
+.noHeaderBorder {
+    border: none;
+}
+
 .titleDiv
 {
     display: inline-flex;

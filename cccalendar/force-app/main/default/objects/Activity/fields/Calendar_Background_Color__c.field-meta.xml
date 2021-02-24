@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Calendar_Background_Color__c</fullName>
     <defaultValue>&quot;Blue&quot;</defaultValue>
+    <deprecated>false</deprecated>
     <description>CSS color code for event background color in calendar view</description>
     <externalId>false</externalId>
     <inlineHelpText>CSS color code for event background color in calendar view</inlineHelpText>
