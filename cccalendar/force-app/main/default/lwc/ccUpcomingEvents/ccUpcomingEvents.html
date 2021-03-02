@@ -3,7 +3,7 @@
     <template if:true={items}>
         <template for:each={items} for:item="item">
             <div key={item.id} class="box slds-m-bottom_medium">
-                <c-ccevent-details event={item} truncate=true no-header-border=true event-detail-button-text={eventDetailButtonText}></c-ccevent-details>
+                <c-ccevent-details event={item} truncate=true no-header-border=true event-detail-button-text={eventDetailButtonText} buttons-on-bottom={buttonsOnBottom}></c-ccevent-details>
             </div>
         </template>
     </template>

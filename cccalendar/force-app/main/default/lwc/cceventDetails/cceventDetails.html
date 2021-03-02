@@ -26,7 +26,8 @@
         <div class="slds-modal__content cccalendar_modal__content slds-p-around_medium">
 
             <lightning-layout multiple-rows=true>
-                <lightning-layout-item padding="around-small" size="12" large-device-size="12" medium-device-size="12" small-device-size="12" >
+                
+                <lightning-layout-item padding="around-small" size="12" large-device-size="12" medium-device-size="12" small-device-size="12" if:false={buttonsOnBottom}>
                     
                     <div class="slds-size--1-of-1 slds-has-flexi-truncate">
                         
@@ -52,6 +53,7 @@
                     </div>
 
                 </lightning-layout-item>
+
                 <lightning-layout-item padding="around-small" size="12" large-device-size="4" medium-device-size="4" small-device-size="12" if:true={event.eventImageURL}>
                     
                     <div class="slds-size--1-of-1 slds-m-top_large slds-align_absolute-center">
@@ -59,6 +61,7 @@
                     </div>
                     
                 </lightning-layout-item>
+
                 <lightning-layout-item padding="around-small" size="12" large-device-size={eventDetailSectionSize} medium-device-size={eventDetailSectionSize} small-device-size="12">
 
                     <div class={divFormElementClasses} if:true={event.location}>
@@ -72,6 +75,34 @@
                     </div>
 
                 </lightning-layout-item>
+
+                <lightning-layout-item padding="around-small" size="12" large-device-size="12" medium-device-size="12" small-device-size="12" if:true={buttonsOnBottom}>
+                    
+                    <div class="slds-size--1-of-1 slds-has-flexi-truncate">
+                        
+                        <template if:false={hideEventDetailButton}>
+                            <a href={event.detailsURL} if:true={event.detailsURL}>
+                                <button title={eventDetailButtonText} type="button" class="slds-button slds-button_brand slds-m-right_small slds-m-bottom_small">
+                                    <span class="slds-truncate cccalendar_eventButtonSpan">{eventDetailButtonText}</span>
+                                </button>
+                            </a>
+                        </template>
+
+                        <a href={event.eventURL} target="_blank" if:true={event.eventURL}>
+                            <button title={event.eventURLText} type="button" class="slds-button slds-button_brand slds-m-right_small slds-m-bottom_small">
+                                <span class="slds-truncate cccalendar_eventButtonSpan">{event.eventURLText}</span>
+                            </button>
+                        </a>
+
+                        <a href={event.eventURL2} target="_blank" if:true={event.eventURL2}>
+                            <button title={event.eventURLText2} type="button" class="slds-button slds-button_brand slds-m-right_small slds-m-bottom_small">
+                                <span class="slds-truncate cccalendar_eventButtonSpan">{event.eventURLText2}</span>
+                            </button>
+                        </a>
+                    </div>
+
+                </lightning-layout-item>
+
             </lightning-layout>
                 
         </div>

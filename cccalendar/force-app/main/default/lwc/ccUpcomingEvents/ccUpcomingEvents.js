@@ -10,6 +10,7 @@ export default class CcUpcomingEvents extends ccBase {
     @api ownerId = '';
     @api eventDetailButtonText = 'More Info';
     @api timezoneLabelsJSON = '';
+    @api buttonsOnBottom = false;
 
     @track items;
     @track itemsMap;

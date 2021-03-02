@@ -13,6 +13,7 @@ export default class CceventDetails extends ccBase {
     @api eventDetailButtonText = 'More Info';
     @api truncate = false;
     @api noHeaderBorder = false;
+    @api buttonsOnBottom = false;
 
     @track stylesSet = false;
 
@@ -44,8 +45,8 @@ export default class CceventDetails extends ccBase {
         else if(this.recordId !== undefined && this.recordId !== null && this.recordId.trim() !== '')
         {
             fetchEvents({
-                pastMonths: 1,
-                futureMonths: 1,
+                pastMonths: 0,
+                futureMonths: 0,
                 eventLimit: 1,
                 whatId: undefined,
                 whoId: undefined,

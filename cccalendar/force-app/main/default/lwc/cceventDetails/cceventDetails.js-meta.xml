@@ -17,6 +17,7 @@
             <property name="hideEventDetailButton" type="Boolean" label="Hide Event Detail Button" required="false" default="false" description="Hide Event Detail (More Info) Button"/>
             <property name="eventDetailButtonText" type="String" label="Event Detail Button Text" required="false" default="More Info" description="Text for the event detail button, defaults to 'More Info'."/>
             <property name="noHeaderBorder" type="Boolean" label="Hide Header Border" required="false" default="false" description="Hide the header border"/>
+            <property name="buttonsOnBottom" type="Boolean" label="Display Buttons at the Bottom" required="false" default="false" description="Check to display the buttons at the bottom instead of above the content."/>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

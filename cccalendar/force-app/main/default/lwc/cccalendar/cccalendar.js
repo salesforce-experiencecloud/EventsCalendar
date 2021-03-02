@@ -26,6 +26,7 @@ export default class Cccalendar extends ccBase {
     @api hideDayView = false;
     @api hideListView = false;
     @api rangeFrequency = 'MONTH';
+    @api buttonsOnBottom = false;
 
     @track calendar;
     @track items;
