@@ -27,6 +27,9 @@ export default class Cccalendar extends ccBase {
     @api hideListView = false;
     @api rangeFrequency = 'MONTH';
     @api buttonsOnBottom = false;
+    @api truncate = false;
+    @api truncateEachLine = false;
+    @api truncateNumberOfLinesToDisplay = 3;
 
     @track calendar;
     @track items;

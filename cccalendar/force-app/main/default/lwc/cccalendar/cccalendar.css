@@ -50,6 +50,7 @@ span.fc-title {
 {
     width: 75%;
     max-width: 75rem;
+    margin: auto;
 }
 
 @media only screen and (max-device-width: 480px) {

@@ -12,21 +12,21 @@
                     <lightning-icon icon-name={event.iconName} 
                         alternative-text={event.title} size="small"></lightning-icon>
                 </span>
-                <div class={divFormElementClasses}>
-                    <h2 class="slds-text-heading_medium slds-hyphenate">{event.title}</h2>
+                <div class="titleH2Container">
+                    <h2 class={divTitleClasses}>{event.title}</h2>
                 </div>
             </div>
-            <div class="subtitleDiv slds-size--1-of-1">
+            <div class="subtitleDiv slds-m-top_small slds-size--1-of-1">
                 <h2 class="slds-text-heading_x-small slds-hyphenate">{event.subtitleText}</h2>
             </div>
-            <div class="subtitleDiv slds-size--1-of-1" if:true={event.subtitleTextLocal}>
+            <div class="subtitleDiv slds-m-top_small slds-size--1-of-1" if:true={event.subtitleTextLocal}>
                 <h2 class="slds-text-heading_x-small slds-hyphenate">{event.subtitleTextLocal}</h2>
             </div>
         </header>
-        <div class="slds-modal__content cccalendar_modal__content slds-p-around_medium">
+        <div class="slds-modal__content cccalendar_modal__content slds-p-around_small">
 
             <lightning-layout multiple-rows=true>
-                
+
                 <lightning-layout-item padding="around-small" size="12" large-device-size="12" medium-device-size="12" small-device-size="12" if:false={buttonsOnBottom}>
                     
                     <div class="slds-size--1-of-1 slds-has-flexi-truncate">

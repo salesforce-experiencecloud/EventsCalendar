@@ -18,6 +18,9 @@
             <property name="eventDetailButtonText" type="String" label="Event Detail Button Text" required="false" default="More Info" description="Text for the event detail button, defaults to 'More Info'."/>
             <property name="noHeaderBorder" type="Boolean" label="Hide Header Border" required="false" default="false" description="Hide the header border"/>
             <property name="buttonsOnBottom" type="Boolean" label="Display Buttons at the Bottom" required="false" default="false" description="Check to display the buttons at the bottom instead of above the content."/>
+            <property name="truncate" type="Boolean" required="false" default="false" label="Truncate Event Title and Body" description="Check to truncate event title and body (location and description)."/>
+            <property name="truncateEachLine" type="Boolean" required="false" default="false" label="Truncate Each Line Separately in Event Description" description="Check to truncate each line separately within the event Description."/>
+            <property name="truncateNumberOfLinesToDisplay" type="Integer" required="false" default="3" label="Number of Lines Shown Before Truncation" description="Specify the number of lines to display before truncation. Only takes effect when Truncate Each Line Separately in Event Description is false."/>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

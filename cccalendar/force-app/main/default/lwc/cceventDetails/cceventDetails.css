@@ -17,6 +17,10 @@
     display: inline-flex;
 }
 
+.titleH2Container {
+    max-width: 100%;
+}
+
 .cccalendar_eventButtonSpan
 {
     min-width: 60px;
@@ -26,6 +30,20 @@
 .cccalendar_modal__content
 {
     box-shadow: none;
+    max-height: calc(100vh - 350px);
+}
+
+.truncateEntireContentBlock {
+    --cccalendar-line-clamp: 3;
+    -webkit-line-clamp: var(--cccalendar-line-clamp, 3);
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    white-space: normal;
+    overflow: hidden;
+}
+
+.noTruncate {
+    overflow-wrap: anywhere;
 }
 
 @media only screen and (max-device-width: 768px) {

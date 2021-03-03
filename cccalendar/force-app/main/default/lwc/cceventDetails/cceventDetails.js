@@ -12,10 +12,13 @@ export default class CceventDetails extends ccBase {
     @api hideEventDetailButton = false;
     @api eventDetailButtonText = 'More Info';
     @api truncate = false;
+    @api truncateEachLine = false;
+    @api truncateNumberOfLinesToDisplay = 3;
     @api noHeaderBorder = false;
     @api buttonsOnBottom = false;
 
-    @track stylesSet = false;
+    @track cccalendarEventIconSpanStylesSet = false;
+    @track divTruncateEntireContentBlockStylesSet = false;
 
     @api 
     get eventDetailSectionSize()
@@ -26,13 +29,41 @@ export default class CceventDetails extends ccBase {
     @api 
     get divFormElementClasses()
     {
-        return (this.truncate) ? 'slds-form-element slds-truncate' : 'slds-form-element' ;
+        let divFormElementClasses = 'slds-form-element';
+        if(this.truncate)
+        {
+            
+            if(this.truncateEachLine)
+            {
+                divFormElementClasses += ' slds-truncate';
+            }
+            else
+            {
+                divFormElementClasses += ' truncateEntireContentBlock';
+            }
+        }
+        else 
+        {
+            divFormElementClasses += ' noTruncate';
+        }
+        return divFormElementClasses;
     }
 
     @api
     get headerClasses()
     {
         return (this.noHeaderBorder) ? 'eventHeader noHeaderBorder slds-modal__header' : 'eventHeader slds-modal__header' ;
+    }
+
+    @api
+    get divTitleClasses()
+    {
+        let divTitleClasses = 'slds-text-heading_medium slds-hyphenate';
+        if(this.truncate)
+        {
+            divTitleClasses += ' slds-truncate';
+        }
+        return divTitleClasses;
     }
 
     connectedCallback()
@@ -102,14 +133,27 @@ export default class CceventDetails extends ccBase {
 
     renderedCallback()
     {
-        if(this.event !== undefined && this.event !== null && this.stylesSet === false)     
+        if(this.event !== undefined && this.event !== null)     
         {
             let cccalendarEventIconSpan = this.template.querySelector('span[role="cccalendarEventIconSpan"]');
-            if(cccalendarEventIconSpan !== undefined && cccalendarEventIconSpan !== null)
+            if(cccalendarEventIconSpan !== undefined && cccalendarEventIconSpan !== null && this.cccalendarEventIconSpanStylesSet === false)
             {
                 cccalendarEventIconSpan.style.setProperty('--lwc-colorTextIconDefault', this.event.backgroundColor);
-                this.stylesSet = true;
+                this.cccalendarEventIconSpanStylesSet = true;
             }
+
+            let divTruncateEntireContentBlock = this.template.querySelectorAll('div.truncateEntireContentBlock');
+            if(divTruncateEntireContentBlock !== undefined && divTruncateEntireContentBlock !== null && this.divTruncateEntireContentBlockStylesSet === false
+                && this.truncateNumberOfLinesToDisplay !== undefined && this.truncateNumberOfLinesToDisplay !== null)
+            {
+                for(let i=0; i < divTruncateEntireContentBlock.length; i++)
+                {
+                    divTruncateEntireContentBlock[i].style.setProperty('--cccalendar-line-clamp', this.truncateNumberOfLinesToDisplay);
+                    this.divTruncateEntireContentBlockStylesSet = true;
+                }
+                
+            }
+
         }
     }
 

@@ -11,6 +11,9 @@ export default class CcUpcomingEvents extends ccBase {
     @api eventDetailButtonText = 'More Info';
     @api timezoneLabelsJSON = '';
     @api buttonsOnBottom = false;
+    @api truncate = false;
+    @api truncateEachLine = false;
+    @api truncateNumberOfLinesToDisplay = 3;
 
     @track items;
     @track itemsMap;
