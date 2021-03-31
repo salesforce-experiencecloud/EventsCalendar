@@ -318,7 +318,11 @@ export default class Cccalendar extends ccBase {
             var buttonList = this.template.querySelectorAll('.fc-button');
             for(var i=0;i<buttonList.length;i++)
             {
-                buttonList[i].tabIndex = "-1";
+                let ariaLabel = buttonList[i].getAttribute('aria-label');
+                if(ariaLabel !== undefined && ariaLabel !== null && ariaLabel.trim() !== '' && ariaLabel === 'prev')
+                {
+                    buttonList[i].setAttribute('aria-label', 'previous');
+                }
                 buttonList[i].addEventListener('mousedown',
                     function(ev){
                         try{

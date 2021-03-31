@@ -8,9 +8,9 @@
                 <span class="slds-assistive-text">Close</span>
             </button>
             <div class="titleDiv slds-size--1-of-1">
-                <span role="cccalendarEventIconSpan" class="slds-m-right_small" if:true={event.iconName}>
+                <span role="cccalendarEventIconSpan" class="slds-m-right_small" if:true={event.iconName} aria-hidden="true" tabindex="-1">
                     <lightning-icon icon-name={event.iconName} 
-                        alternative-text={event.title} size="small"></lightning-icon>
+                        size="small"></lightning-icon>
                 </span>
                 <div class="titleH2Container">
                     <h2 class={divTitleClasses}>{event.title}</h2>
@@ -32,22 +32,22 @@
                     <div class="slds-size--1-of-1 slds-has-flexi-truncate">
                         
                         <template if:false={hideEventDetailButton}>
-                            <a href={event.detailsURL} if:true={event.detailsURL}>
-                                <button title={eventDetailButtonText} type="button" class="slds-button slds-button_brand slds-m-right_small slds-m-bottom_small">
-                                    <span class="slds-truncate cccalendar_eventButtonSpan">{eventDetailButtonText}</span>
+                            <a href={event.detailsURL} title={eventDetailButtonTitle} if:true={event.detailsURL}>
+                                <button title={eventDetailButtonText} aria-hidden="true" tabindex="-1" type="button" class="slds-button slds-button_brand slds-m-right_small slds-m-bottom_small slds-truncate cccalendar_eventButtonSpan">
+                                    {eventDetailButtonText}
                                 </button>
                             </a>
                         </template>
 
-                        <a href={event.eventURL} target="_blank" if:true={event.eventURL}>
-                            <button title={event.eventURLText} type="button" class="slds-button slds-button_brand slds-m-right_small slds-m-bottom_small">
-                                <span class="slds-truncate cccalendar_eventButtonSpan">{event.eventURLText}</span>
+                        <a href={event.eventURL} title={eventURLTextTitle} target="_blank" if:true={event.eventURL}>
+                            <button title={event.eventURLText} aria-hidden="true" tabindex="-1" type="button" class="slds-button slds-button_brand slds-m-right_small slds-m-bottom_small lds-truncate cccalendar_eventButtonSpan">
+                                {event.eventURLText}
                             </button>
                         </a>
 
-                        <a href={event.eventURL2} target="_blank" if:true={event.eventURL2}>
-                            <button title={event.eventURLText2} type="button" class="slds-button slds-button_brand slds-m-right_small slds-m-bottom_small">
-                                <span class="slds-truncate cccalendar_eventButtonSpan">{event.eventURLText2}</span>
+                        <a href={event.eventURL2} title={eventURLTextTitle2} target="_blank" if:true={event.eventURL2}>
+                            <button title={event.eventURLText2} aria-hidden="true" tabindex="-1" type="button" class="slds-button slds-button_brand slds-m-right_small slds-m-bottom_small slds-truncate cccalendar_eventButtonSpan">
+                                {event.eventURLText2}
                             </button>
                         </a>
                     </div>
@@ -57,7 +57,7 @@
                 <lightning-layout-item padding="around-small" size="12" large-device-size="4" medium-device-size="4" small-device-size="12" if:true={event.eventImageURL}>
                     
                     <div class="slds-size--1-of-1 slds-m-top_large slds-align_absolute-center">
-                        <img src={event.eventImageURL} alt={event.title} title={event.title}/>
+                        <img src={event.eventImageURL} alt="" title={event.title}/>
                     </div>
                     
                 </lightning-layout-item>
@@ -81,22 +81,22 @@
                     <div class="slds-size--1-of-1 slds-has-flexi-truncate">
                         
                         <template if:false={hideEventDetailButton}>
-                            <a href={event.detailsURL} if:true={event.detailsURL}>
-                                <button title={eventDetailButtonText} type="button" class="slds-button slds-button_brand slds-m-right_small slds-m-bottom_small">
-                                    <span class="slds-truncate cccalendar_eventButtonSpan">{eventDetailButtonText}</span>
+                            <a href={event.detailsURL} title={eventDetailButtonTitle} if:true={event.detailsURL}>
+                                <button title={eventDetailButtonText} aria-hidden="true" tabindex="-1" type="button" class="slds-button slds-button_brand slds-m-right_small slds-m-bottom_small slds-truncate cccalendar_eventButtonSpan">
+                                    {eventDetailButtonText}
                                 </button>
                             </a>
                         </template>
 
-                        <a href={event.eventURL} target="_blank" if:true={event.eventURL}>
-                            <button title={event.eventURLText} type="button" class="slds-button slds-button_brand slds-m-right_small slds-m-bottom_small">
-                                <span class="slds-truncate cccalendar_eventButtonSpan">{event.eventURLText}</span>
+                        <a href={event.eventURL} title={eventURLTextTitle} target="_blank" if:true={event.eventURL}>
+                            <button title={event.eventURLText} aria-hidden="true" tabindex="-1" type="button" class="slds-button slds-button_brand slds-m-right_small slds-m-bottom_small slds-truncate cccalendar_eventButtonSpan">
+                                {event.eventURLText}
                             </button>
                         </a>
 
-                        <a href={event.eventURL2} target="_blank" if:true={event.eventURL2}>
-                            <button title={event.eventURLText2} type="button" class="slds-button slds-button_brand slds-m-right_small slds-m-bottom_small">
-                                <span class="slds-truncate cccalendar_eventButtonSpan">{event.eventURLText2}</span>
+                        <a href={event.eventURL2} title={eventURLTextTitle2} target="_blank" if:true={event.eventURL2}>
+                            <button title={event.eventURLText2} aria-hidden="true" tabindex="-1" type="button" class="slds-button slds-button_brand slds-m-right_small slds-m-bottom_small slds-truncate cccalendar_eventButtonSpan">
+                                {event.eventURLText2}
                             </button>
                         </a>
                     </div>

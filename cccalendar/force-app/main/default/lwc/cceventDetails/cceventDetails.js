@@ -66,6 +66,48 @@ export default class CceventDetails extends ccBase {
         return divTitleClasses;
     }
 
+    @api 
+    get eventDetailButtonTitle()
+    {
+        let tmpTitle = '';
+        
+        tmpTitle += (this.event !== undefined && this.eventDetailButtonText !== undefined && 
+            this.eventDetailButtonText !== null && this.eventDetailButtonText.trim() !== '') ? this.eventDetailButtonText + ', ' : '';
+        
+        tmpTitle += (this.event !== undefined && this.event.title !== undefined && this.event.title !== null 
+            && this.event.title.trim() !== '' ) ? this.event.title : '' ;
+
+        return tmpTitle;
+    }
+
+    @api 
+    get eventURLTextTitle()
+    {
+        let tmpTitle = '';
+        
+        tmpTitle += (this.event !== undefined && this.event.eventURLText !== undefined && 
+            this.event.eventURLText !== null && this.event.eventURLText.trim() !== '') ? this.event.eventURLText + ', ' : '';
+        
+        tmpTitle += (this.event !== undefined && this.event.title !== undefined && this.event.title !== null 
+            && this.event.title.trim() !== '' ) ? this.event.title : '' ;
+
+        return tmpTitle;
+    }
+
+    @api 
+    get eventURLTextTitle2()
+    {
+        let tmpTitle = '';
+        
+        tmpTitle += (this.event !== undefined && this.event.eventURLText2 !== undefined && 
+            this.event.eventURLText2 !== null && this.event.eventURLText2.trim() !== '') ? this.event.eventURLText2 + ', ' : '';
+        
+        tmpTitle += (this.event !== undefined && this.event.title !== undefined && this.event.title !== null 
+            && this.event.title.trim() !== '' ) ? this.event.title : '' ;
+
+        return tmpTitle;
+    }
+
     connectedCallback()
     {
         if(this.event !== undefined && this.event !== null)
