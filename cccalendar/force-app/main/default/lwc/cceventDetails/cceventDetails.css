@@ -46,6 +46,10 @@
     overflow-wrap: anywhere;
 }
 
+.linkWrapperDiv {
+    display: inline-block;
+}
+
 @media only screen and (max-device-width: 768px) {
 
     .cccalendar_eventButtonSpan
