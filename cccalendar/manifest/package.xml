@@ -42,5 +42,9 @@
         <members>*</members>
         <name>CustomObject</name>
     </types>
+    <types>
+        <members>Event-CC Calendar Event Layout</members>
+        <name>Layout</members>
+    </types>
     <version>48.0</version>
 </Package>
