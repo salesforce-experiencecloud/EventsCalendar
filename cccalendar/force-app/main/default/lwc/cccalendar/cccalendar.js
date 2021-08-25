@@ -181,6 +181,7 @@ export default class Cccalendar extends ccBase {
             var eventColor = this.eventColor;
 
             var isMobile = this.checkMobile();
+            this.selectedViews = [];
             for(let i=0;i<this.allViewsList.length;i++)
             {
                 if(this.allViewsList[i] === 'dayGridMonth' && this.hideMonthView === false && isMobile === false)
