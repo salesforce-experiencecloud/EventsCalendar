@@ -13,6 +13,8 @@ export default class Ccbase extends LightningElement {
 
     @track timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
+    locale = 'en-US';
+
     localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     populateCalendarEvents(items) {
@@ -118,13 +120,13 @@ export default class Ccbase extends LightningElement {
                 var startDateInitial = this.convertTextToDate(items[i].StartDateTime);
                 var endDateInitial = this.convertTextToDate(items[i].EndDateTime);
 
-                var startDateString = startDateInitial.toLocaleString(LOCALE, {timeZone: this.timezone});
-                var endDateString = endDateInitial.toLocaleString(LOCALE, {timeZone: this.timezone});
+                var startDateString = startDateInitial.toLocaleString(this.locale, {timeZone: this.timezone});
+                var endDateString = endDateInitial.toLocaleString(this.locale, {timeZone: this.timezone});
                 
                 if(items[i].IsAllDayEvent === true)
                 {
-                    startDateString = new Date(items[i].StartDateTime.replace('T00','T23')).toLocaleString(LOCALE, {timeZone: this.timezone});
-                    endDateString = new Date(items[i].EndDateTime.replace('T00','T23')).toLocaleString(LOCALE, {timeZone: this.timezone});
+                    startDateString = new Date(items[i].StartDateTime.replace('T00','T23')).toLocaleString(this.locale, {timeZone: this.timezone});
+                    endDateString = new Date(items[i].EndDateTime.replace('T00','T23')).toLocaleString(this.locale, {timeZone: this.timezone});
                 }
 
                 var startDate = new Date(startDateString);
@@ -209,13 +211,13 @@ export default class Ccbase extends LightningElement {
             var startDateInitial = this.convertTextToDate(inputEvent.StartDateTime);
             var endDateInitial = this.convertTextToDate(inputEvent.EndDateTime);
 
-            var startDateString = startDateInitial.toLocaleString(LOCALE, {timeZone: timezone});
-            var endDateString = endDateInitial.toLocaleString(LOCALE, {timeZone: timezone});
+            var startDateString = startDateInitial.toLocaleString(this.locale, {timeZone: timezone});
+            var endDateString = endDateInitial.toLocaleString(this.locale, {timeZone: timezone});
             
             if(inputEvent.IsAllDayEvent === true)
             {
-                startDateString = new Date(inputEvent.StartDateTime.replace('T00','T23')).toLocaleString(LOCALE, {timeZone: timezone});
-                endDateString = new Date(inputEvent.EndDateTime.replace('T00','T23')).toLocaleString(LOCALE, {timeZone: timezone});
+                startDateString = new Date(inputEvent.StartDateTime.replace('T00','T23')).toLocaleString(this.locale, {timeZone: timezone});
+                endDateString = new Date(inputEvent.EndDateTime.replace('T00','T23')).toLocaleString(this.locale, {timeZone: timezone});
             }
 
             var startDate = new Date(startDateString);
