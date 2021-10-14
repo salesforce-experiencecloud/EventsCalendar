@@ -104,11 +104,12 @@ global with sharing class cccalendarController {
             String monthRange = '(EndDateTime <= ' + futureRangeFrequency + String.valueOf(futureMonths) + ' AND EndDateTime >= TODAY)';
             whereConditions.add(monthRange);
         }
-        else if(pastMonths == 0 && futureMonths == 0)
+        else if(pastMonths == 0 && futureMonths == 0 && recordIdID == null)
         {
             String monthRange = 'EndDateTime >= TODAY';
             whereConditions.add(monthRange);
         }
+        
 
         if(whatIdID != null)
         {
