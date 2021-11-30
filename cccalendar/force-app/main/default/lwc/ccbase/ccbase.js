@@ -291,7 +291,15 @@ export default class Ccbase extends LightningElement {
 
     getURLParameter(name) 
     {
-        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+        if(window['$A'] !== undefined && window['$A'] !== null) //aura runtime
+        {
+            return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+        }
+        else //LWR
+        {
+            let urlSearch = (document.URL.split('?').length > 1) ? '?' + document.URL.split('?')[1] : '';
+            return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(urlSearch) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+        }
     }
 
     pad(number) {
@@ -313,7 +321,19 @@ export default class Ccbase extends LightningElement {
 
     isInSitePreview()
     {
-        return (window.location.host.indexOf('sitepreview') > 0 || window.location.host.indexOf('livepreview') > 0 || window.location.host.indexOf('live.') > 0);
+        if(window !== undefined && window !== null && window.location !== undefined && window.location !== null)
+        { 
+            try{
+                return (window.location.host.indexOf('sitepreview') > 0 || window.location.host.indexOf('livepreview') > 0 || window.location.host.indexOf('live.') > 0);
+            } catch(err)
+            {
+                return (document.URL.indexOf('sitepreview') > 0 || document.URL.indexOf('livepreview') > 0 || document.URL.indexOf('live.') > 0);
+            }
+        }
+        else 
+        {
+            return (document.URL.indexOf('sitepreview') > 0 || document.URL.indexOf('livepreview') > 0 || document.URL.indexOf('live.') > 0);
+        }
     }
 
     convertErrorToJSONString(err)
@@ -333,6 +353,18 @@ export default class Ccbase extends LightningElement {
             mode: mode
         });
         this.dispatchEvent(evt);
+    }
+
+    loadScript(url) {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = url;
+            script.charset = 'utf-8';
+            script.type = 'text/javascript';
+            document.head.appendChild(script);
+            script.addEventListener('load', resolve);
+            script.addEventListener('error', reject);
+        })
     }
 
 }

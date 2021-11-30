@@ -57,15 +57,15 @@ export default class Cccalendar extends ccBase {
                 loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/daygrid/main.min.css'),
                 loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/timegrid/main.min.css'),
                 loadStyle(this, fullCalendar + '/fullcalendar-4.2.0/packages/list/main.min.css'),
-                loadScript(this, jquery),
-                loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/core/main.js')
+                this.loadScript(jquery),
+                this.loadScript(fullCalendar + '/fullcalendar-4.2.0/packages/core/main.js')
               ]).then(() => {
                 Promise.all([
                     
-                    loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/daygrid/main.min.js'),
-                    loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/interaction/main.min.js'),
-                    loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/timegrid/main.min.js'),
-                    loadScript(this, fullCalendar + '/fullcalendar-4.2.0/packages/list/main.min.js')
+                    this.loadScript(fullCalendar + '/fullcalendar-4.2.0/packages/daygrid/main.min.js'),
+                    this.loadScript(fullCalendar + '/fullcalendar-4.2.0/packages/interaction/main.min.js'),
+                    this.loadScript(fullCalendar + '/fullcalendar-4.2.0/packages/timegrid/main.min.js'),
+                    this.loadScript(fullCalendar + '/fullcalendar-4.2.0/packages/list/main.min.js')
                 ]).then(() => {
                     try {
                         if(this.items === undefined || this.items === null || this.items.length === 0)
