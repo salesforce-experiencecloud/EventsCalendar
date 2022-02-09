@@ -115,7 +115,7 @@ If you want to use the calendar component to expose events to the public in an u
 **Component Properties:**
 
 
-|Property Label	|Aura Property API Name	|LWC Property API Name	|Type	|Description	|
+|Property Label|Aura Property API Name|LWC Property API Name|Type|Description|
 |---	|---	|---	|---	|---	|
 |Number of past months|pastMonths	|past-months	|Integer	|(required) Set the number of months in the past to retrieve events for.	|
 |Number of future months	|futureMonths	|future-months	|Integer	|(required) Set the number of months in the future to retrieve events for.	|
