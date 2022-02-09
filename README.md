@@ -109,15 +109,19 @@ If you want to use the calendar component to expose events to the public in an u
 ## Calendar for Experience Cloud component for Experience Builder
 
 **Component Label**: Calendar for Experience Cloud
+
 **Component Aura API Name**: cccalendar
+
 **Component LWC API Name**: cccalendar
+
 **Component Namespace**: cccalendar
+
 **Component Properties:**
 
 
-|Property Label|Aura Property API Name|LWC Property API Name|Type|Description|
+|Property Label	|Aura Property API Name	|LWC Property API Name	|Type	|Description	|
 |---	|---	|---	|---	|---	|
-|Number of past months|pastMonths	|past-months	|Integer	|(required) Set the number of months in the past to retrieve events for.	|
+|Number of past months	|pastMonths	|past-months	|Integer	|(required) Set the number of months in the past to retrieve events for.	|
 |Number of future months	|futureMonths	|future-months	|Integer	|(required) Set the number of months in the future to retrieve events for.	|
 |Range Frequency	|rangeFrequency	|range-frequency	|String	|(required) Select the past/future range frequency (MONTH or DAY).	|
 |Max number of events to retrieve	|eventLimit	|event-limit	|Integer	|(required) Set the maximum number of events to retrieve.	|
@@ -135,13 +139,16 @@ If you want to use the calendar component to expose events to the public in an u
 |Hide Week View	|hideWeekView	|hide-week-view	|Boolean	|Hide Week view on calendar.	|
 |Hide Day View	|hideDayView	|hide-day-view	|Boolean	|Hide Day view on calendar.	|
 |Hide List View	|hideListView	|hide-list-view	|Boolean	|Hide List view on calendar.	|
-|	|	|	|	|	|
 
 
 **Component Label**: Calendar Event Details for Experience Cloud
+
 **Component Aura API Name**: cceventDetails
+
 **Component LWC API Name**: ccevent-details
+
 **Component Namespace**: cccalendar
+
 **Component Properties:**
 
 
@@ -156,9 +163,13 @@ If you want to use the calendar component to expose events to the public in an u
 
 
 **Component Label**: Calendar Upcoming Events
+
 **Component Aura API Name**: ccUpcomingEvents
+
 **Component LWC API Name**: cc-upcoming-events
+
 **Component Namespace**: cccalendar
+
 **Component Properties**:
 
 
