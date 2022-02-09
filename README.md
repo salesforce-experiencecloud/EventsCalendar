@@ -7,8 +7,6 @@
 
 **Last Updated:** 11/30/2021
 
-**Reviews and Contributions:**
-
 
 * * *
 
