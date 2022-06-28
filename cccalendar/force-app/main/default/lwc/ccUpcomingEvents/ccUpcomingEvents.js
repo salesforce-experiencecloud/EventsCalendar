@@ -21,6 +21,7 @@ export default class CcUpcomingEvents extends ccBase {
     @api truncate = false;
     @api truncateEachLine = false;
     @api truncateNumberOfLinesToDisplay = 3;
+    @api hideEventDetailButton = false;
 
     @track items;
     @track itemsMap;
