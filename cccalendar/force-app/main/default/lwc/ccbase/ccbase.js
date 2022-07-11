@@ -133,7 +133,10 @@ export default class Ccbase extends LightningElement {
                 if(items[i].IsAllDayEvent === true)
                 {
                     startDateString = new Date(items[i].StartDateTime.replace('T00','T23')).toLocaleString(this.locale, {timeZone: this.timezone});
-                    endDateString = new Date(items[i].EndDateTime.replace('T00','T23')).toLocaleString(this.locale, {timeZone: this.timezone});
+
+                    let endDateObj = new Date(items[i].EndDateTime.replace('T00','T23'));
+                    endDateObj.setDate(endDateObj.getDate() + 1);
+                    endDateString = endDateObj.toLocaleString(this.locale, {timeZone: this.timezone});
                 }
 
                 var startDate = new Date(startDateString);
