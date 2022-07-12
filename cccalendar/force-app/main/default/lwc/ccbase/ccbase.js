@@ -146,6 +146,10 @@ export default class Ccbase extends LightningElement {
                 eventInputVar.start = this.getISOFormattedDateString(startDate);
                 eventInputVar.end = this.getISOFormattedDateString(endDate);
                 
+                if(items[i].IsAllDayEvent === true)
+                {
+                    endDate.setDate(endDate.getDate() - 1);
+                }
 
                 var startDateText = months[startDate.getMonth()] + ' ' + startDate.getDate();
                 var endDateText = months[endDate.getMonth()] + ' ' + endDate.getDate(); 
@@ -227,7 +231,9 @@ export default class Ccbase extends LightningElement {
             if(inputEvent.IsAllDayEvent === true)
             {
                 startDateString = new Date(inputEvent.StartDateTime.replace('T00','T23')).toLocaleString(this.locale, {timeZone: timezone});
-                endDateString = new Date(inputEvent.EndDateTime.replace('T00','T23')).toLocaleString(this.locale, {timeZone: timezone});
+                let endDateObj = new Date(inputEvent.EndDateTime.replace('T00','T23'));
+                endDateObj.setDate(endDateObj.getDate() + 1);
+                endDateString = endDateObj.toLocaleString(this.locale, {timeZone: timezone});
             }
 
             var startDate = new Date(startDateString);
@@ -243,6 +249,11 @@ export default class Ccbase extends LightningElement {
                 eventInputVar.start = this.getISOFormattedDateString(startDate);
                 eventInputVar.end = this.getISOFormattedDateString(endDate);
             }    
+
+            if(inputEvent.IsAllDayEvent === true)
+            {
+                endDate.setDate(endDate.getDate() - 1);
+            }
 
             var startDateText = months[startDate.getMonth()] + ' ' + startDate.getDate();
             var endDateText = months[endDate.getMonth()] + ' ' + endDate.getDate(); 
