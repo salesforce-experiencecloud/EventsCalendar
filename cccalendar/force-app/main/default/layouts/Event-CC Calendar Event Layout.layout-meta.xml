@@ -27,6 +27,9 @@
                 <field>EndDateTime</field>
             </layoutItems>
             <layoutItems>
+                <emptySpace>true</emptySpace>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Event_URL_Text__c</field>
             </layoutItems>
@@ -36,11 +39,19 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>Event_URL_Open_in_Same_Tab__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>Event_URL_Text_2__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Event_URL_2__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Event_URL_2_Open_in_Same_Tab__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
