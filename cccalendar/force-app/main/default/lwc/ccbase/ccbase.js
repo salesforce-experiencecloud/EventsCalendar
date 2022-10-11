@@ -81,8 +81,10 @@ export default class Ccbase extends LightningElement {
             eventInputVar.iconName = (items[i].cccalendar__Event_Icon_Name__c !== undefined && items[i].cccalendar__Event_Icon_Name__c !== null && items[i].cccalendar__Event_Icon_Name__c.trim() !== '') ? items[i].cccalendar__Event_Icon_Name__c : '';
             eventInputVar.eventURL = (items[i].cccalendar__Event_URL__c !== undefined && items[i].cccalendar__Event_URL__c !== null && items[i].cccalendar__Event_URL__c.trim() !== '') ? items[i].cccalendar__Event_URL__c : '';
             eventInputVar.eventURLText = (items[i].cccalendar__Event_URL_Text__c !== undefined && items[i].cccalendar__Event_URL_Text__c !== null && items[i].cccalendar__Event_URL_Text__c.trim() !== '') ? items[i].cccalendar__Event_URL_Text__c : '';
+            eventInputVar.eventURLTarget = (items[i].cccalendar__Event_URL_Open_in_Same_Tab__c !== undefined && items[i].cccalendar__Event_URL_Open_in_Same_Tab__c !== null && items[i].cccalendar__Event_URL_Open_in_Same_Tab__c === false) ? '_blank' : '';
             eventInputVar.eventURL2 = (items[i].cccalendar__Event_URL_2__c !== undefined && items[i].cccalendar__Event_URL_2__c !== null && items[i].cccalendar__Event_URL_2__c.trim() !== '') ? items[i].cccalendar__Event_URL_2__c : '';
             eventInputVar.eventURLText2 = (items[i].cccalendar__Event_URL_Text_2__c !== undefined && items[i].cccalendar__Event_URL_Text_2__c !== null && items[i].cccalendar__Event_URL_Text_2__c.trim() !== '') ? items[i].cccalendar__Event_URL_Text_2__c : '';
+            eventInputVar.eventURLTarget2 = (items[i].cccalendar__Event_URL_2_Open_in_Same_Tab__c !== undefined && items[i].cccalendar__Event_URL_2_Open_in_Same_Tab__c !== null && items[i].cccalendar__Event_URL_2_Open_in_Same_Tab__c === false) ? '_blank' : '';
             eventInputVar.eventImageURL = (items[i].cccalendar__Image_URL__c !== undefined && items[i].cccalendar__Image_URL__c !== null && items[i].cccalendar__Image_URL__c.trim() !== '') ? items[i].cccalendar__Image_URL__c : '';
             eventInputVar.detailsURL = this.siteUrl + '/' + items[i].Id + timezoneURLParam;
             

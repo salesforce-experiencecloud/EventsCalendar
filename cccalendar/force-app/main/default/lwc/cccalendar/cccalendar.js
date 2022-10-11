@@ -27,6 +27,7 @@ export default class Cccalendar extends ccBase {
     @api listofTimezonesOverride = 'America/Los_Angeles,America/Chicago,America/Denver,America/Indianapolis,GMT,Europe/London,Europe/Paris,Asia/Jakarta,Asia/Makassar,Asia/Jayapura,Asia/Kolkata,Asia/Tokyo,Australia/Sydney,Australia/Darwin,Australia/Perth';
     @api hideEventDetailButton = false;
     @api eventDetailButtonText = 'More Info';
+    @api hideTimezonePicklist = false;
     @api showWeekends = false;
     @api hideMonthView = false;
     @api hideWeekView = false;

@@ -83,7 +83,8 @@ global with sharing class cccalendarController {
         String fields = 'Id,IsAllDayEvent,ActivityDate,Description,EndDateTime,Location,StartDateTime,Subject,Type,';
         fields += 'cccalendar__Calendar_Background_Color__c,cccalendar__Calendar_Border_Color__c,cccalendar__Calendar_Rendering__c,';
         fields += 'cccalendar__Calendar_Text_Color__c,cccalendar__Display_Events_Local_Timezone__c,cccalendar__Event_URL__c,cccalendar__Event_URL_Text__c,';
-        fields += 'cccalendar__Event_URL_2__c, cccalendar__Event_URL_Text_2__c, cccalendar__Image_URL__c,cccalendar__Local_Timezone__c, cccalendar__Event_Icon_Name__c';
+        fields += 'cccalendar__Event_URL_2__c, cccalendar__Event_URL_Text_2__c, cccalendar__Image_URL__c,cccalendar__Local_Timezone__c, cccalendar__Event_Icon_Name__c,';
+        fields += 'cccalendar__Event_URL_Open_in_Same_Tab__c, cccalendar__Event_URL_2_Open_in_Same_Tab__c';
 
         query += fields;
 
@@ -189,8 +190,10 @@ global with sharing class cccalendarController {
             && Schema.sObjectType.Event.fields.cccalendar__Display_Events_Local_Timezone__c.isAccessible()
             && Schema.sObjectType.Event.fields.cccalendar__Event_URL__c.isAccessible()
             && Schema.sObjectType.Event.fields.cccalendar__Event_URL_Text__c.isAccessible()
+            && Schema.sObjectType.Event.fields.cccalendar__Event_URL_Open_in_Same_Tab__c.isAccessible()
             && Schema.sObjectType.Event.fields.cccalendar__Event_URL_2__c.isAccessible()
             && Schema.sObjectType.Event.fields.cccalendar__Event_URL_Text_2__c.isAccessible()
+            && Schema.sObjectType.Event.fields.cccalendar__Event_URL_2_Open_in_Same_Tab__c.isAccessible()
             && Schema.sObjectType.Event.fields.cccalendar__Image_URL__c.isAccessible()
             && Schema.sObjectType.Event.fields.cccalendar__Local_Timezone__c.isAccessible()
             && Schema.sObjectType.Event.fields.cccalendar__Event_Icon_Name__c.isAccessible()

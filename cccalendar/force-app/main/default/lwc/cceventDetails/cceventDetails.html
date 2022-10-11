@@ -42,7 +42,7 @@
                         </template>
 
                         <div class="linkWrapperDiv">
-                            <a href={event.eventURL} title={eventURLTextTitle} target="_blank" if:true={event.eventURL}>
+                            <a href={event.eventURL} title={eventURLTextTitle} target={event.eventURLTarget} if:true={event.eventURL}>
                                 <button title={event.eventURLText} aria-hidden="true" tabindex="-1" type="button" class="slds-button slds-button_brand slds-m-right_small slds-m-bottom_small lds-truncate cccalendar_eventButtonSpan">
                                     {event.eventURLText}
                                 </button>
@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="linkWrapperDiv">
-                            <a href={event.eventURL2} title={eventURLTextTitle2} target="_blank" if:true={event.eventURL2}>
+                            <a href={event.eventURL2} title={eventURLTextTitle2} target={event.eventURLTarget2} if:true={event.eventURL2}>
                                 <button title={event.eventURLText2} aria-hidden="true" tabindex="-1" type="button" class="slds-button slds-button_brand slds-m-right_small slds-m-bottom_small slds-truncate cccalendar_eventButtonSpan">
                                     {event.eventURLText2}
                                 </button>
@@ -97,7 +97,7 @@
                         </template>
 
                         <div class="linkWrapperDiv">
-                            <a href={event.eventURL} title={eventURLTextTitle} target="_blank" if:true={event.eventURL}>
+                            <a href={event.eventURL} title={eventURLTextTitle} target={event.eventURLTarget} if:true={event.eventURL}>
                                 <button title={event.eventURLText} aria-hidden="true" tabindex="-1" type="button" class="slds-button slds-button_brand slds-m-right_small slds-m-bottom_small slds-truncate cccalendar_eventButtonSpan">
                                     {event.eventURLText}
                                 </button>
@@ -105,7 +105,7 @@
                         </div>
 
                         <div class="linkWrapperDiv">
-                            <a href={event.eventURL2} title={eventURLTextTitle2} target="_blank" if:true={event.eventURL2}>
+                            <a href={event.eventURL2} title={eventURLTextTitle2} target={event.eventURLTarget2} if:true={event.eventURL2}>
                                 <button title={event.eventURLText2} aria-hidden="true" tabindex="-1" type="button" class="slds-button slds-button_brand slds-m-right_small slds-m-bottom_small slds-truncate cccalendar_eventButtonSpan">
                                     {event.eventURLText2}
                                 </button>

@@ -2,7 +2,7 @@
 
     <template if:true={isInit}>
 
-        <div class="slds-m-bottom_large">
+        <div class="slds-m-bottom_large" if:false={hideTimezonePicklist}>
             <lightning-combobox
                         name="timezones"
                         label="Choose Timezone"
