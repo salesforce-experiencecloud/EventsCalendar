@@ -14,7 +14,7 @@ export default class Ccbase extends LightningElement {
 
     @track isInit = false;
     @track events;
-    @track eventsMap = new Map();
+    @track eventsMap = {};
     @track siteUrl = '';
     @track timezoneLabels = []; 
 
@@ -31,7 +31,7 @@ export default class Ccbase extends LightningElement {
 
         let events = '';
         let eventInput = [];
-        let eventMapInput = new Map();
+        let eventMapInput = {};
 
         let descriptionLength = 0;
         if(this.checkMobile())
