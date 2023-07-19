@@ -51,8 +51,18 @@ export default class Cccalendar extends ccBase {
 
     allViewsList = ['dayGridMonth','timeGridWeek','timeGridDay','listWeek'];
 
+    renderedCallback() {
+        if(this.hideTimezonePicklist === false && 
+            this.template.querySelector('.timezonePicklist') !== undefined && this.template.querySelector('.timezonePicklist') !== null
+            && this.template.querySelector('.timezonePicklist').placeholder === 'Choose Timezone')
+        {
+            this.template.querySelector('.timezonePicklist').placeholder = this.timezone;
+        }
+    }
+
     connectedCallback()
     {
+
         this.escListener = this.handleEscListener.bind(this);
             document.addEventListener(
                 'keydown',
@@ -172,6 +182,7 @@ export default class Cccalendar extends ccBase {
             
             this.timezoneObjList.push(tz);
         }
+        
     }
 
     renderCalendar()

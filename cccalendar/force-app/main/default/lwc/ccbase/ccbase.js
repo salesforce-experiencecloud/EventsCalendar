@@ -9,6 +9,7 @@ import { LightningElement, track } from 'lwc';
 import LANG from '@salesforce/i18n/lang';
 import LOCALE from '@salesforce/i18n/locale';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { timezoneInfoMap } from './timezoneMap.js'
 
 export default class Ccbase extends LightningElement {
 
@@ -134,9 +135,18 @@ export default class Ccbase extends LightningElement {
                 
                 if(items[i].IsAllDayEvent === true)
                 {
-                    startDateString = new Date(items[i].StartDateTime.replace('T00','T23')).toLocaleString(this.locale, {timeZone: this.timezone});
+                    let endDateObj;
 
-                    let endDateObj = new Date(items[i].EndDateTime.replace('T00','T23'));
+                    if(timezoneInfoMap.hasOwnProperty(this.timezone) && timezoneInfoMap[this.timezone].offset < 0)
+                    {
+                        startDateString = new Date(items[i].StartDateTime.replace('T00','T23')).toLocaleString(this.locale, {timeZone: this.timezone});
+                        endDateObj = new Date(items[i].EndDateTime.replace('T00','T23'));
+                    }
+                    else 
+                    {
+                        startDateString = new Date(items[i].StartDateTime).toLocaleString(this.locale, {timeZone: this.timezone});
+                        endDateObj = new Date(items[i].EndDateTime);
+                    }
                     endDateObj.setDate(endDateObj.getDate() + 1);
                     endDateString = endDateObj.toLocaleString(this.locale, {timeZone: this.timezone});
                 }
@@ -232,8 +242,18 @@ export default class Ccbase extends LightningElement {
             
             if(inputEvent.IsAllDayEvent === true)
             {
-                startDateString = new Date(inputEvent.StartDateTime.replace('T00','T23')).toLocaleString(this.locale, {timeZone: timezone});
-                let endDateObj = new Date(inputEvent.EndDateTime.replace('T00','T23'));
+                let endDateObj;
+
+                if(timezoneInfoMap.hasOwnProperty(this.timezone) && timezoneInfoMap[this.timezone].offset < 0)
+                {
+                    startDateString = new Date(items[i].StartDateTime.replace('T00','T23')).toLocaleString(this.locale, {timeZone: this.timezone});
+                    endDateObj = new Date(items[i].EndDateTime.replace('T00','T23'));
+                }
+                else 
+                {
+                    startDateString = new Date(items[i].StartDateTime).toLocaleString(this.locale, {timeZone: this.timezone});
+                    endDateObj = new Date(items[i].EndDateTime);
+                }
                 endDateObj.setDate(endDateObj.getDate() + 1);
                 endDateString = endDateObj.toLocaleString(this.locale, {timeZone: timezone});
             }

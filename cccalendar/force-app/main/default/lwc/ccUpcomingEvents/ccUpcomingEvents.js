@@ -26,14 +26,15 @@ export default class CcUpcomingEvents extends ccBase {
     @track items;
     @track itemsMap;
     
+    handleTimeZoneChangeBinded;
 
     connectedCallback()
     {
-        this.handleTimeZoneChange = this.handleTimeZoneChange.bind(this);
+        this.handleTimeZoneChangeBinded = this.handleTimeZoneChange.bind(this);
         
         window.addEventListener(
             'CCCALENDAR_TIMEZONE_CHANGE', 
-            this.handleTimeZoneChange, 
+            this.handleTimeZoneChangeBinded, 
             false
         );
 
@@ -96,7 +97,7 @@ export default class CcUpcomingEvents extends ccBase {
         
         window.removeEventListener(
             'CCCALENDAR_TIMEZONE_CHANGE', 
-            this.handleTimeZoneChange, 
+            this.handleTimeZoneChangeBinded, 
             false
         );
     }
